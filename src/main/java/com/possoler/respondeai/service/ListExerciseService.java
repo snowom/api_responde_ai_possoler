@@ -46,7 +46,7 @@ public class ListExerciseService {
 
     private List<String> buildLightSolutionResponse(JSONObject jsonObject) {
         List<String> lightSolution = new ArrayList<>();
-        List<JSONObject> lightSolutionResponse = jsonHelper.getJsonObjectsFromArray(jsonObject, "lightSolution");
+        List<String> lightSolutionResponse = jsonHelper.getJsonObjectsStringFromArray(jsonObject, "lightSolution");
         for(Object lightSolutionObj : lightSolutionResponse) {
             lightSolution.add(lightSolutionObj.toString());
         }

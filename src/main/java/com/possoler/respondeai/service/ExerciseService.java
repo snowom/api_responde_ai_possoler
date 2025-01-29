@@ -48,13 +48,12 @@ public class ExerciseService {
 
     private List<String> buildLightSolutionResponse(JSONObject jsonObject) {
         List<String> lightSolution = new ArrayList<>();
-        List<JSONObject> lightSolutionResponse = jsonHelper.getJsonObjectsFromArray(jsonObject, "lightSolution");
+        List<String> lightSolutionResponse = jsonHelper.getJsonObjectsStringFromArray(jsonObject, "lightSolution");
         for(Object lightSolutionObj : lightSolutionResponse) {
             lightSolution.add(lightSolutionObj.toString());
         }
         return lightSolution;
     }
-
 
     private List<VideoResponseDTO> buildVideoResponse(JSONObject jsonObject) {
         List<VideoResponseDTO> videos = new ArrayList<>();
