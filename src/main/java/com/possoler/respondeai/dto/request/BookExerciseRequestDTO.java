@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 public class BookExerciseRequestDTO {
 
     @Getter
-    @NotEmpty(message = "O campo \"exerciseId\" não pode ser vazio")
+    @NotEmpty(message = "O campo \"exercise_id\" não pode ser vazio")
     @JsonProperty(value = "exercise_id", required = true)
     private String exerciseId;
 }

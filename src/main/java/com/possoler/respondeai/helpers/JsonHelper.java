@@ -1,4 +1,4 @@
-package com.possoler.respondeai.utils.json;
+package com.possoler.respondeai.helpers;
 
 import com.possoler.respondeai.exceptions.ServerErrorException;
 import org.json.JSONArray;
@@ -10,7 +10,7 @@ import java.util.List;
 public class JsonHelper {
 
     /**
-     * Get content from a property present in a json object
+     * Get string contents from a property present in a json object
      * @param jsonObject json object
      * @param jsonPropertyName json property name
      * @return jsonPropertyName json key content string
@@ -24,7 +24,7 @@ public class JsonHelper {
     }
 
     /**
-     * Get content from an array property present in a json object
+     * Get string contents from an array property present in a json object
      * @param jsonObject json object
      * @param jsonPropertyName json property name
      * @return jsonPropertyName json key content string
@@ -33,13 +33,30 @@ public class JsonHelper {
         try{
             List<String> result = new ArrayList<>();
             JSONArray jsonArray = jsonObject.getJSONArray(jsonPropertyName);
-
-            for(int i=0; i<jsonArray.length(); i++) {
-                result.add(jsonArray.get(i).toString());
+            for(Object obj : jsonArray) {
+                result.add(obj.toString());
             }
             return result;
         }catch (Exception e) {
             throw new ServerErrorException("Falha ao obter objeto " + "\"" + jsonPropertyName + "\"");
         }
+    }
+
+    /**
+     * Gets a list of JSON objects present in a JSON array object
+     * @param jsonObject json object
+     * @param jsonArrayPropertyName json array property name
+     * @return list of json objects contained in the array
+     */
+    public List<JSONObject> getJsonObjectsFromArray(JSONObject jsonObject, String jsonArrayPropertyName) {
+        if(jsonObject.has(jsonArrayPropertyName)) {
+            List<JSONObject> jsonObjects = new ArrayList<>();
+            JSONArray jsonArray = (JSONArray) jsonObject.get(jsonArrayPropertyName);
+            for(Object obj : jsonArray) {
+                jsonObjects.add((JSONObject) obj);
+            }
+            return jsonObjects;
+        }
+        throw new ServerErrorException("Falha ao obter objeto " + "\"" + jsonArrayPropertyName + "\"");
     }
 }

@@ -1,15 +1,12 @@
 package com.possoler.respondeai.service;
 
 import com.possoler.respondeai.dto.response.BookExerciseResponseDTO;
-import com.possoler.respondeai.exceptions.ServerErrorException;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
-import com.possoler.respondeai.utils.json.JsonHelper;
-import org.json.JSONArray;
+import com.possoler.respondeai.helpers.JsonHelper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
