@@ -1,6 +1,6 @@
 package com.possoler.respondeai.controller;
 
-import com.possoler.respondeai.dto.request.ExerciseRequestDTO;
+import com.possoler.respondeai.dto.request.BookExerciseRequestDTO;
 import com.possoler.respondeai.service.BookExerciseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +18,11 @@ public class BookExerciseController {
     }
 
     @PostMapping("${respondeai-api.endpoint.getBookExerciseData}")
-    private ResponseEntity<Object> getExerciseData(
+    private ResponseEntity<Object> getBookExerciseData(
         @RequestHeader(name = "Authorization") String token,
-        @RequestBody @Valid ExerciseRequestDTO payload
+        @RequestBody @Valid BookExerciseRequestDTO payload
     ){
-        Object response = bookExerciseService.getBookExerciseData(payload.getItemId(), token);
+        Object response = bookExerciseService.getBookExerciseData(payload.getExerciseId(), token);
         return ResponseEntity.ok().body(response);
     }
 }

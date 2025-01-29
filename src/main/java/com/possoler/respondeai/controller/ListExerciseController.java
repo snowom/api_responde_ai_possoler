@@ -1,6 +1,5 @@
 package com.possoler.respondeai.controller;
 
-import com.possoler.respondeai.dto.request.ExerciseRequestDTO;
 import com.possoler.respondeai.service.ListExerciseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
