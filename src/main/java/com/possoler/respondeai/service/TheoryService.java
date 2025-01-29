@@ -47,7 +47,6 @@ public class TheoryService {
     private List<VideoResponseDTO> buildVideoResponse(JSONObject jsonObject) {
         List<VideoResponseDTO> videos = new ArrayList<>();
         List<JSONObject> videoResponse = jsonHelper.getJsonObjectsFromArray(jsonObject, "videos");
-
         for (JSONObject object : videoResponse) {
             videos.add(VideoResponseDTO.builder()
                 .providerId(jsonHelper.getObject(object, "providerId"))
