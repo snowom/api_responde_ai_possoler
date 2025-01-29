@@ -1,5 +1,6 @@
 package com.possoler.respondeai.controller;
 
+import com.possoler.respondeai.dto.request.ExerciseRequestDTO;
 import com.possoler.respondeai.service.ExerciseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class ExerciseController {
         @RequestHeader(name = "Authorization") String token,
         @RequestBody @Valid ExerciseRequestDTO payload
     ){
-        Object response = exerciseService.getExerciseData(payload.getItemId(), token);
+        Object response = exerciseService.getExerciseData(payload.getExerciseId(), token);
         return ResponseEntity.ok().body(response);
     }
 }
