@@ -1,6 +1,6 @@
 package com.possoler.respondeai.controller;
 
-import com.possoler.respondeai.dto.request.ExerciseRequestDTO;
+import com.possoler.respondeai.dto.request.TheoryRequestDTO;
 import com.possoler.respondeai.service.TheoryService;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +20,9 @@ public class TheoryController {
     @PostMapping("${respondeai-api.endpoint.getTheoryData}")
     private ResponseEntity<Object> getTheoryData(
             @RequestHeader(name = "Authorization") String token,
-            @RequestBody @Valid ExerciseRequestDTO payload
+            @RequestBody @Valid TheoryRequestDTO payload
     ){
-        Object response = theoryService.getTheoryData(payload.getItemId(), token);
+        Object response = theoryService.getTheoryData(payload.getTheoryId(), token);
         return ResponseEntity.ok().body(response);
     }
 }

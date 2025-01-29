@@ -22,7 +22,7 @@ public class ExerciseController {
         @RequestHeader(name = "Authorization") String token,
         @RequestBody @Valid ExerciseRequestDTO payload
     ){
-        Object response = exerciseService.getExerciseData(payload.getItemId(), token);
+        Object response = exerciseService.getExerciseData(payload.getExerciseId(), token);
         return ResponseEntity.ok().body(response);
     }
 }

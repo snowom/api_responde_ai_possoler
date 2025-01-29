@@ -3,6 +3,7 @@ package com.possoler.respondeai.service;
 import com.possoler.respondeai.dto.response.ExerciseResponseDTO;
 import com.possoler.respondeai.dto.response.VideoResponseDTO;
 import com.possoler.respondeai.exceptions.ServerErrorException;
+import com.possoler.respondeai.helpers.JsonHelper;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,8 +17,13 @@ import java.util.List;
 public class ExerciseService {
 
     private final RespondeAiClient respondeAiClient;
+    private final JsonHelper jsonHelper;
 
-    public ExerciseService(@Qualifier("ExerciseClient") RespondeAiClient respondeAiClient) {
+    public ExerciseService(
+        @Qualifier("ExerciseClient") RespondeAiClient respondeAiClient,
+        JsonHelper jsonHelper
+    ) {
+        this.jsonHelper = jsonHelper;
         this.respondeAiClient = respondeAiClient;
     }
 
@@ -29,7 +35,7 @@ public class ExerciseService {
     private ExerciseResponseDTO buildExerciseResponse(String responseBody) {
         JSONObject jsonObject = new JSONObject(responseBody);
 
-        var lightAnswer = buildLightAnswerResponse(jsonObject);
+        var lightAnswer = jsonHelper.getObject(jsonObject, "lightAnswer");
         var videos = buildVideoResponse(jsonObject);
         var lightSolution = buildLightSolutionResponse(jsonObject);
 
@@ -41,42 +47,23 @@ public class ExerciseService {
     }
 
     private List<String> buildLightSolutionResponse(JSONObject jsonObject) {
-        try{
-            List<String> lightSolution = new ArrayList<>();
-            JSONArray lightSolutionResponse = jsonObject.getJSONArray("lightSolution");
-
-            for(int i=0; i<lightSolutionResponse.length(); i++) {
-                lightSolution.add(lightSolutionResponse.get(i).toString());
-            }
-            return lightSolution;
-        }catch (Exception e) {
-            throw new ServerErrorException("[Exercise fixation] - Falha ao obter objeto \"lightSolution\"");
+        List<String> lightSolution = new ArrayList<>();
+        List<String> lightSolutionResponse = jsonHelper.getJsonObjectsStringFromArray(jsonObject, "lightSolution");
+        for(Object lightSolutionObj : lightSolutionResponse) {
+            lightSolution.add(lightSolutionObj.toString());
         }
-    }
-
-    private String buildLightAnswerResponse(JSONObject jsonObject) {
-        try{
-            return jsonObject.get("lightAnswer").toString();
-        }catch (Exception e) {
-            throw new ServerErrorException("[Exercise] - Falha ao obter objeto \"lightAnswer\"");
-        }
+        return lightSolution;
     }
 
     private List<VideoResponseDTO> buildVideoResponse(JSONObject jsonObject) {
         List<VideoResponseDTO> videos = new ArrayList<>();
-
-        try{
-            JSONArray videoResponse = (JSONArray) jsonObject.get("videos");
-            for(int i=0; i<videoResponse.length(); i++) {
-                videos.add(VideoResponseDTO.builder()
-                .providerId((String) videoResponse.getJSONObject(i).get("providerId"))
-                .provider((String) videoResponse.getJSONObject(i).get("provider"))
+        List<JSONObject> videoResponse = jsonHelper.getJsonObjectsFromArray(jsonObject, "videos");
+        for (JSONObject object : videoResponse) {
+            videos.add(VideoResponseDTO.builder()
+                .providerId(jsonHelper.getObject(object, "providerId"))
+                .provider(jsonHelper.getObject(object, "provider"))
                 .build());
-            }
-        }catch (Exception e) {
-            throw new ServerErrorException("[Exercise] - Falha ao obter objeto \"videos\"");
         }
-
         return videos;
     }
 }

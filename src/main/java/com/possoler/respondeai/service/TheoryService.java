@@ -4,6 +4,7 @@ package com.possoler.respondeai.service;
 import com.possoler.respondeai.dto.response.TheoryResponseDTO;
 import com.possoler.respondeai.dto.response.VideoResponseDTO;
 import com.possoler.respondeai.exceptions.ServerErrorException;
+import com.possoler.respondeai.helpers.JsonHelper;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,8 +18,13 @@ import java.util.List;
 public class TheoryService {
 
     private final RespondeAiClient respondeAiClient;
+    private final JsonHelper jsonHelper;
 
-    public TheoryService(@Qualifier("TheoryClient") RespondeAiClient respondeAiClient) {
+    public TheoryService(
+        @Qualifier("TheoryClient") RespondeAiClient respondeAiClient,
+        JsonHelper jsonHelper
+    ) {
+        this.jsonHelper = jsonHelper;
         this.respondeAiClient = respondeAiClient;
     }
 
@@ -29,7 +35,7 @@ public class TheoryService {
 
     private TheoryResponseDTO buildTheoryResponse(String responseBody) {
         var jsonObject = new JSONObject(responseBody);
-        var lightBody = buildLightBodyResponse(jsonObject);
+        var lightBody = jsonHelper.getObject(jsonObject, "lightBody");
         var videos = buildVideoResponse(jsonObject);
 
         return TheoryResponseDTO.builder()
@@ -38,29 +44,15 @@ public class TheoryService {
             .build();
     }
 
-    private String buildLightBodyResponse(JSONObject jsonObject) {
-        try{
-            return jsonObject.get("lightBody").toString();
-        }catch (Exception e) {
-            throw new ServerErrorException("[Theory] - Falha ao obter objeto \"lightBody\"");
-        }
-    }
-
     private List<VideoResponseDTO> buildVideoResponse(JSONObject jsonObject) {
         List<VideoResponseDTO> videos = new ArrayList<>();
-
-        try{
-            JSONArray videoResponse = (JSONArray) jsonObject.get("videos");
-            for(int i=0; i<videoResponse.length(); i++) {
-                videos.add(VideoResponseDTO.builder()
-                .providerId((String) videoResponse.getJSONObject(i).get("providerId"))
-                .provider((String) videoResponse.getJSONObject(i).get("provider"))
+        List<JSONObject> videoResponse = jsonHelper.getJsonObjectsFromArray(jsonObject, "videos");
+        for (JSONObject object : videoResponse) {
+            videos.add(VideoResponseDTO.builder()
+                .providerId(jsonHelper.getObject(object, "providerId"))
+                .provider(jsonHelper.getObject(object, "provider"))
                 .build());
-            }
-        }catch (Exception e) {
-            throw new ServerErrorException("[Theory] - Falha ao obter objeto \"videos\"");
         }
-
         return videos;
     }
 }
