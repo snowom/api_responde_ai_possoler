@@ -3,9 +3,7 @@ package com.possoler.respondeai.service;
 import com.possoler.respondeai.client.*;
 import com.possoler.respondeai.dto.request.GatewayRequestDTO;
 import com.possoler.respondeai.exceptions.ClientErrorException;
-import com.possoler.respondeai.exceptions.NotFoundException;
 import com.possoler.respondeai.helpers.JsonHelper;
-import com.possoler.respondeai.interfaces.RespondeAiClient;
 import com.possoler.respondeai.interfaces.RespondeAiService;
 import org.springframework.stereotype.Service;
 
