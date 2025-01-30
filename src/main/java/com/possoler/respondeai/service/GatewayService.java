@@ -12,6 +12,19 @@ import java.util.regex.Pattern;
 @Service
 public class GatewayService {
 
+    private final String BASE_URL_LEARN = "app.respondeai.com.br/aprender";
+    private final String BASE_URL_PRATICE = "app.respondeai.com.br/praticar";
+    private final String THEORY_PATH = "/teoria/";
+    private final String EXERCISE_PATH = "/exercicio/";
+    private final String LIST_EXERCISE_PATH = "/exercicio-lista/";
+    private final String BOOK_PATH = "/livro/";
+    private final String URL_DOMAIN = "app.respondeai.com.br/";
+    private final String SOLUTION_BOOK_PATH = "materias/solucionario/livro";
+    private final String BOOK_EDITION_PATH = "/edicao/";
+    private final String BOOK_CONTENT_PATH = "/conteudo/";
+    private final String BOOK_EXERCISE_ID_REGEX = "\\/exercicio\\/[0-9]+";
+    private final String VIDEO_LESSON_PATH = "/lecture/aulao/";
+
     private final JsonHelper jsonHelper;
 
     public GatewayService(JsonHelper jsonHelper) {
@@ -19,29 +32,33 @@ public class GatewayService {
     }
 
     public RespondeAiService getInstance(GatewayRequestDTO gatewayRequestDTO) {
-        if (gatewayRequestDTO.getUrl().contains("app.respondeai.com.br/aprender") && gatewayRequestDTO.getUrl().contains("/teoria/")) {
+        if (gatewayRequestDTO.getUrl().contains(BASE_URL_LEARN) && gatewayRequestDTO.getUrl().contains(THEORY_PATH)) {
             setItemIdFromDTO(gatewayRequestDTO);
             return new TheoryService(new TheoryClient(), jsonHelper);
         }
-        if (gatewayRequestDTO.getUrl().contains("app.respondeai.com.br/aprender") && gatewayRequestDTO.getUrl().contains("/exercicio/")) {
+        if (gatewayRequestDTO.getUrl().contains(BASE_URL_LEARN) && gatewayRequestDTO.getUrl().contains(EXERCISE_PATH)) {
             setItemIdFromDTO(gatewayRequestDTO);
             return new ExerciseService(new ExerciseClient(), jsonHelper);
         }
-        if ((gatewayRequestDTO.getUrl().contains("app.respondeai.com.br/aprender") || gatewayRequestDTO.getUrl().contains("app.respondeai.com.br/praticar")) && gatewayRequestDTO.getUrl().contains("/exercicio-lista/")) {
+        if (
+            (gatewayRequestDTO.getUrl().contains(BASE_URL_LEARN) ||
+            gatewayRequestDTO.getUrl().contains(BASE_URL_PRATICE)) &&
+            gatewayRequestDTO.getUrl().contains(LIST_EXERCISE_PATH)
+        ) {
             setItemIdFromDTO(gatewayRequestDTO);
             return new ListExerciseService(new ListExerciseClient(), jsonHelper);
         }
         if (
-            (gatewayRequestDTO.getUrl().contains("app.respondeai.com.br/") &&
-            gatewayRequestDTO.getUrl().contains("materias/solucionario/livro") &&
-            gatewayRequestDTO.getUrl().contains("/edicao/") &&
-            Pattern.compile("\\/exercicio\\/[0-9]+").matcher(gatewayRequestDTO.getUrl()).find()) ||
-            (gatewayRequestDTO.getUrl().contains("/conteudo/")) && gatewayRequestDTO.getUrl().contains("/livro/")
+            (gatewayRequestDTO.getUrl().contains(URL_DOMAIN) &&
+            gatewayRequestDTO.getUrl().contains(SOLUTION_BOOK_PATH) &&
+            gatewayRequestDTO.getUrl().contains(BOOK_EDITION_PATH) &&
+            Pattern.compile(BOOK_EXERCISE_ID_REGEX).matcher(gatewayRequestDTO.getUrl()).find()) ||
+            (gatewayRequestDTO.getUrl().contains(BOOK_CONTENT_PATH)) && gatewayRequestDTO.getUrl().contains(BOOK_PATH)
         ) {
             setItemIdFromDTO(gatewayRequestDTO);
             return new BookExerciseService(new BookExerciseClient(), jsonHelper);
         }
-        if (gatewayRequestDTO.getUrl().contains("/lecture/aulao/")) {
+        if (gatewayRequestDTO.getUrl().contains(VIDEO_LESSON_PATH)) {
             setItemIdFromDTO(gatewayRequestDTO);
             return new VideoLessonService(new VideoLessonClient());
         }
