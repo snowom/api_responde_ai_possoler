@@ -5,6 +5,7 @@ import com.possoler.respondeai.dto.response.VideoResponseDTO;
 import com.possoler.respondeai.exceptions.ServerErrorException;
 import com.possoler.respondeai.helpers.JsonHelper;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
+import com.possoler.respondeai.interfaces.RespondeAiService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,8 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class ExerciseService {
+@Service("ExerciseService")
+public class ExerciseService implements RespondeAiService {
 
     private final RespondeAiClient respondeAiClient;
     private final JsonHelper jsonHelper;
@@ -27,7 +28,8 @@ public class ExerciseService {
         this.respondeAiClient = respondeAiClient;
     }
 
-    public Object getExerciseData(String itemId, String token) {
+    @Override
+    public Object getContentMaterial(String itemId, String token) {
         var response = respondeAiClient.getData(itemId, token);
         return buildExerciseResponse(response.toString());
     }

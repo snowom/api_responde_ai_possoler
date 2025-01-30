@@ -1,7 +1,9 @@
 package com.possoler.respondeai.controller;
 
 import com.possoler.respondeai.dto.request.LessonRequestDTO;
+import com.possoler.respondeai.interfaces.RespondeAiService;
 import com.possoler.respondeai.service.VideoLessonService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +13,10 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*")
 public class VideoLessonController {
 
-    private final VideoLessonService videoLessonService;
+    private final RespondeAiService respondeAiService;
 
-    public VideoLessonController(VideoLessonService videoLessonService){
-        this.videoLessonService = videoLessonService;
+    public VideoLessonController(@Qualifier("VideoLessonService") RespondeAiService respondeAiService){
+        this.respondeAiService = respondeAiService;
     }
 
     @PostMapping("${respondeai-api.endpoint.getVideoLessonData}")
@@ -22,7 +24,7 @@ public class VideoLessonController {
         @RequestHeader("Authorization") String token,
         @RequestBody @Valid LessonRequestDTO lessonRequestDTO
     ){
-        Object response = videoLessonService.getVideoLessonData(lessonRequestDTO.getLessonId(), token);
+        Object response = respondeAiService.getContentMaterial(lessonRequestDTO.getLessonId(), token);
         return ResponseEntity.ok().body(response);
     }
 }
