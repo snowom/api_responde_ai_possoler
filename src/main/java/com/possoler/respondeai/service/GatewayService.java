@@ -2,6 +2,8 @@ package com.possoler.respondeai.service;
 
 import com.possoler.respondeai.client.*;
 import com.possoler.respondeai.dto.request.GatewayRequestDTO;
+import com.possoler.respondeai.exceptions.ClientErrorException;
+import com.possoler.respondeai.exceptions.NotFoundException;
 import com.possoler.respondeai.helpers.JsonHelper;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
 import com.possoler.respondeai.interfaces.RespondeAiService;
@@ -32,7 +34,8 @@ public class GatewayService {
             return new ListExerciseService(new ListExerciseClient(), jsonHelper);
         }
         if (
-            (gatewayRequestDTO.getUrl().contains("materias/solucionario/livro") &&
+            (gatewayRequestDTO.getUrl().contains("app.respondeai.com.br/") &&
+            gatewayRequestDTO.getUrl().contains("materias/solucionario/livro") &&
             gatewayRequestDTO.getUrl().contains("/edicao/") &&
             Pattern.compile("\\/exercicio\\/[0-9]+").matcher(gatewayRequestDTO.getUrl()).find()) ||
             (gatewayRequestDTO.getUrl().contains("/conteudo/")) && gatewayRequestDTO.getUrl().contains("/livro/")
@@ -44,8 +47,7 @@ public class GatewayService {
             setItemIdFromDTO(gatewayRequestDTO);
             return new VideoLessonService(new VideoLessonClient());
         }
-        // TODO: Implementar exceção correta
-        throw new RuntimeException("");
+        throw new ClientErrorException("Url inválida ou não suportada pela aplicação");
     }
 
     private void setItemIdFromDTO(GatewayRequestDTO gatewayRequestDTO) {
