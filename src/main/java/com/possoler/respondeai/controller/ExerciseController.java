@@ -1,7 +1,8 @@
 package com.possoler.respondeai.controller;
 
 import com.possoler.respondeai.dto.request.ExerciseRequestDTO;
-import com.possoler.respondeai.service.ExerciseService;
+import com.possoler.respondeai.interfaces.RespondeAiService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +12,10 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*")
 public class ExerciseController {
 
-    private final ExerciseService exerciseService;
+    private final RespondeAiService respondeAiService;
 
-    public ExerciseController(ExerciseService exerciseService) {
-        this.exerciseService = exerciseService;
+    public ExerciseController(@Qualifier("ExerciseService") RespondeAiService respondeAiService) {
+        this.respondeAiService = respondeAiService;
     }
 
     @PostMapping("${respondeai-api.endpoint.getExerciseData}")
@@ -22,7 +23,7 @@ public class ExerciseController {
         @RequestHeader(name = "Authorization") String token,
         @RequestBody @Valid ExerciseRequestDTO payload
     ){
-        Object response = exerciseService.getExerciseData(payload.getExerciseId(), token);
+        Object response = respondeAiService.getContentMaterial(payload.getExerciseId(), token);
         return ResponseEntity.ok().body(response);
     }
 }
