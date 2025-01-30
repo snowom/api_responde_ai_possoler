@@ -5,6 +5,7 @@ import com.possoler.respondeai.dto.response.video_lesson.VideoDTO;
 import com.possoler.respondeai.dto.response.video_lesson.VideoLessonResponseDTO;
 import com.possoler.respondeai.exceptions.ServerErrorException;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
+import com.possoler.respondeai.interfaces.RespondeAiService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,8 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class VideoLessonService {
+@Service("VideoLessonService")
+public class VideoLessonService implements RespondeAiService {
 
     private final String PROVIDER_JSON_PROPERTY_NAME = "provider";
     private final String PROVIDERID_JSON_PROPERTY_NAME = "providerId";
@@ -34,12 +35,11 @@ public class VideoLessonService {
         this.respondeAiClient = respondeAiClient;
     }
 
-
-    public List<VideoLessonResponseDTO> getVideoLessonData(String itemId, String token) {
+    @Override
+    public Object getContentMaterial(String itemId, String token) {
         var response = respondeAiClient.getData(itemId, token);
         return buildVideoLeassonResponse(response.toString());
     }
-
 
     private List<VideoLessonResponseDTO> buildVideoLeassonResponse(String responseBody) {
         var videosResponse = new ArrayList<VideoLessonResponseDTO>();

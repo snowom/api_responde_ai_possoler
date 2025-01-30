@@ -3,14 +3,15 @@ package com.possoler.respondeai.service;
 import com.possoler.respondeai.dto.response.BookExerciseResponseDTO;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
 import com.possoler.respondeai.helpers.JsonHelper;
+import com.possoler.respondeai.interfaces.RespondeAiService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class BookExerciseService {
+@Service("BookExerciseService")
+public class BookExerciseService implements RespondeAiService {
 
     private final RespondeAiClient respondeAiClient;
     private final JsonHelper jsonHelper;
@@ -23,7 +24,8 @@ public class BookExerciseService {
         this.respondeAiClient = respondeAiClient;
     }
 
-    public Object getBookExerciseData(String itemId, String token) {
+    @Override
+    public Object getContentMaterial(String itemId, String token) {
         var response = respondeAiClient.getData(itemId, token);
         return buildBookResponse(response.toString());
     }
