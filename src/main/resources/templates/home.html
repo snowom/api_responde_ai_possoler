@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Responde Aí API</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="/css/styleFooter.css">
+        <link rel="stylesheet" href="/css/styleNavbar.css">
+    </head>
+    <body style="background-color: #f7f7f7 !important;">
+        <!-- MENU LATERAL -->
+        <div id="wallSidebarOpen"></div>
+        <div class="sidebar">
+            <div class="logo_content">
+                <div class="logo">
+                    <div class="logo_name">Menu</div>
+                </div>
+                <i id="btnMenu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="transform: ;msFilter:;"><path d="M4 6H20V8H4zM4 11H20V13H4zM4 16H20V18H4z"></path></svg>
+                </i>
+            </div>
+            <ul class="nav_list">
+                <li>
+                    <a id="home_icon" href="/">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="transform: ;msFilter:;"><path d="M3,13h1v2v5c0,1.103,0.897,2,2,2h3h6h3c1.103,0,2-0.897,2-2v-5v-2h1c0.404,0,0.77-0.244,0.924-0.617 c0.155-0.374,0.069-0.804-0.217-1.09l-9-9c-0.391-0.391-1.023-0.391-1.414,0l-9,9c-0.286,0.286-0.372,0.716-0.217,1.09 C2.23,12.756,2.596,13,3,13z M10,20v-5h4v5H10z M12,4.414l6,6V15l0,0l0.001,5H16v-5c0-1.103-0.897-2-2-2h-4c-1.103,0-2,0.897-2,2v5 H6v-5v-3v-1.586L12,4.414z"></path></svg>
+                        </i>
+                        <span class="links_name">Início</span>
+                    </a>
+                    <span class="tooltip">Início</span>
+                </li>
+                <li>
+                    <a id="download_icon" href="#blockDownload">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="transform: ;msFilter:;"><path d="M12 16L16 11 13 11 13 4 11 4 11 11 8 11z"></path><path d="M20,18H4v-7H2v7c0,1.103,0.897,2,2,2h16c1.103,0,2-0.897,2-2v-7h-2V18z"></path></svg>
+                        </i>
+                        <span class="links_name">Download</span>
+                    </a>
+                    <span class="tooltip">Download</span>
+                </li>
+                <li>
+                    <a id="info_icon" href="#blockSobre">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="transform: ;msFilter:;"><path d="M12,2C6.486,2,2,6.486,2,12s4.486,10,10,10s10-4.486,10-10S17.514,2,12,2z M12,20c-4.411,0-8-3.589-8-8s3.589-8,8-8 s8,3.589,8,8S16.411,20,12,20z"></path><path d="M11 11H13V17H11zM11 7H13V9H11z"></path></svg>
+                        </i>
+                        <span class="links_name">Sobre</span>
+                    </a>
+                    <span class="tooltip">Sobre</span>
+                </li>
+                <li>
+                    <a id="donate_icon" href="#blocoDoacao">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="transform: ;msFilter:;"><path d="M20.92 2.38A15.72 15.72 0 0 0 17.5 2a8.26 8.26 0 0 0-6 2.06Q9.89 5.67 8.31 7.27c-1.21-.13-4.08-.2-6 1.74a1 1 0 0 0 0 1.41l11.3 11.32a1 1 0 0 0 1.41 0c1.95-2 1.89-4.82 1.77-6l3.21-3.2c3.19-3.19 1.74-9.18 1.68-9.43a1 1 0 0 0-.76-.73zm-2.36 8.75L15 14.67a1 1 0 0 0-.27.9 6.81 6.81 0 0 1-.54 3.94L4.52 9.82a6.67 6.67 0 0 1 4-.5A1 1 0 0 0 9.39 9s1.4-1.45 3.51-3.56A6.61 6.61 0 0 1 17.5 4a14.51 14.51 0 0 1 2.33.2c.24 1.43.62 5.04-1.27 6.93z"></path><circle cx="15.73" cy="8.3" r="2"></circle><path d="M5 16c-2 1-2 5-2 5a7.81 7.81 0 0 0 5-2z"></path></svg>
+                        </i>
+                        <span class="links_name">Doação</span>
+                    </a>
+                    <span class="tooltip">Doação</span>
+                </li>
+                <li>
+                    <a id="question_icon" href="#blockPerguntas">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="transform: ;msFilter:;"><path d="M12 4C9.243 4 7 6.243 7 9h2c0-1.654 1.346-3 3-3s3 1.346 3 3c0 1.069-.454 1.465-1.481 2.255-.382.294-.813.626-1.226 1.038C10.981 13.604 10.995 14.897 11 15v2h2v-2.009c0-.024.023-.601.707-1.284.32-.32.682-.598 1.031-.867C15.798 12.024 17 11.1 17 9 17 6.243 14.757 4 12 4zM11 18H13V20H11z"></path></svg>
+                        </i>
+                        <span class="links_name">Perguntas</span>
+                    </a>
+                    <span class="tooltip">Perguntas</span>
+                </li>
+                <li>
+                    <a id="tech_icon" href="#blockTecnologia">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="transform: ;msFilter:;"><path d="m7.375 16.781 1.25-1.562L4.601 12l4.024-3.219-1.25-1.562-5 4a1 1 0 0 0 0 1.562l5 4zm9.25-9.562-1.25 1.562L19.399 12l-4.024 3.219 1.25 1.562 5-4a1 1 0 0 0 0-1.562l-5-4zm-1.649-4.003-4 18-1.953-.434 4-18z"></path></svg>
+                        </i>
+                        <span class="links_name">Tecnologias</span>
+                    </a>
+                    <span class="tooltip">Tecnologias</span>
+                </li>
+                <li>
+                    <a id="tutorials_icon" href="#blockTutorial">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="transform: ;msFilter:;"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zm.001 6c-.001 0-.001 0 0 0h-.465l-2.667-4H20l.001 4zM9.536 9 6.869 5h2.596l2.667 4H9.536zm5 0-2.667-4h2.596l2.667 4h-2.596zM4 5h.465l2.667 4H4V5zm0 14v-8h16l.002 8H4z"></path><path d="m10 18 5.5-3-5.5-3z"></path></svg>
+                        </i>
+                        <span class="links_name">Tutoriais</span>
+                    </a>
+                    <span class="tooltip">Tutoriais</span>
+                </li>
+                <!-- <li>
+                    <a id="aboutme_icon" href="#blockSobreMim">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="transform: ;msFilter:;"><path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path></svg>
+                        </i>
+                        <span class="links_name" th:text="${menuLateral.MenuLateralSobreMim}"></span>
+                    </a>
+                    <span class="tooltip" th:text="${menuLateral.MenuLateralSobreMim}"></span>
+                </li> -->
+                <li>
+                    <a id="comments_icon" href="#divComentario">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="transform: ;msFilter:;"><path d="M20,2H4C2.897,2,2,2.897,2,4v18l5.333-4H20c1.103,0,2-0.897,2-2V4C22,2.897,21.103,2,20,2z M20,16H6.667L4,18V4h16V16z"></path></svg>
+                        </i>
+                        <span class="links_name">Comentários</span>
+                    </a>
+                    <span class="tooltip">Comentários</span>
+                </li>
+                <li>
+                    <a id="github_icon" target="_blank" href="https://github.com/thomazf/PossoLer/">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="transform: ;msFilter:;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026,2c-5.509,0-9.974,4.465-9.974,9.974c0,4.406,2.857,8.145,6.821,9.465 c0.499,0.09,0.679-0.217,0.679-0.481c0-0.237-0.008-0.865-0.011-1.696c-2.775,0.602-3.361-1.338-3.361-1.338 c-0.452-1.152-1.107-1.459-1.107-1.459c-0.905-0.619,0.069-0.605,0.069-0.605c1.002,0.07,1.527,1.028,1.527,1.028 c0.89,1.524,2.336,1.084,2.902,0.829c0.091-0.645,0.351-1.085,0.635-1.334c-2.214-0.251-4.542-1.107-4.542-4.93 c0-1.087,0.389-1.979,1.024-2.675c-0.101-0.253-0.446-1.268,0.099-2.64c0,0,0.837-0.269,2.742,1.021 c0.798-0.221,1.649-0.332,2.496-0.336c0.849,0.004,1.701,0.115,2.496,0.336c1.906-1.291,2.742-1.021,2.742-1.021 c0.545,1.372,0.203,2.387,0.099,2.64c0.64,0.696,1.024,1.587,1.024,2.675c0,3.833-2.33,4.675-4.552,4.922 c0.355,0.308,0.675,0.916,0.675,1.846c0,1.334-0.012,2.41-0.012,2.737c0,0.267,0.178,0.577,0.687,0.479 C19.146,20.115,22,16.379,22,11.974C22,6.465,17.535,2,12.026,2z"></path></svg>
+                        </i>
+                        <span class="links_name">GitHub</span>
+                    </a>
+                    <span class="tooltip">GitHub</span>
+                </li>
+                <li>
+                    <a id="coffe_icon" target="_blank" href="https://www.paypal.com/donate?hosted_button_id=3UPQZZ2DQTPY8">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="transform: ;msFilter:;"><path d="M19 5h-1V4a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v9a4 4 0 0 0 4 4h6c1.858 0 3.411-1.279 3.858-3H19a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3zm1 6a1 1 0 0 1-1 1h-1V7h1a1 1 0 0 1 1 1v3zm-2 8H3c0 1.654 1.346 3 3 3h11c1.654 0 3-1.346 3-3h-2z"></path></svg>
+                        </i>
+                        <span class="links_name">Um café?</span>
+                    </a>
+                    <span class="tooltip">Um café?</span>
+                </li>
+            </ul>
+        </div>
+        <div id="page_content" class="page_content">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row mt-3" style="margin-bottom: 60px !important">
+                        <div class="col-12 text-center">
+                        <span class="lead">
+                            <h2>Responde Aí API</h2>
+                        </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="lead">
+                                <span>Cole o link da página que gostaria de ver sem bloqueios:</span>
+                            </p>
+                            <form>
+                                <input id="input_url" style="width:" placeholder="https://app.respondeai.com.br/" type="text" class="form-control" aria-describedby="inputGroup-sizing-default">
+                                <small id="error_label" class="form-text" style="margin-bottom: 20px !important; display:none !important; color: #ff00009c !important;">URL não suportada ou inválida</small>
+                                <div style="margin-top: 10px !important;">
+                                    <button disabled id="btn_unlock" type="button" class="btn btn-success btn-block">Desbloquear</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row" style="margin-top: 60px !important;">
+                        <div class="col-12">
+                            <div id="card_content" class="card shadow p-3 mb-5 rounded">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="container-fluid d-flex justify-content-center">
+                                            <dotlottie-player src="https://lottie.host/1689a5d9-85db-4391-9984-30c6a4a84151/seCfhPsTGW.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+                                        </div>
+                                        <center>
+                                            <p class="lead">Nenhuma busca feita ainda</p>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row footer-style">
+                    <div class="col-12 copyright-text">
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <a href="https://github.com/snowom/api_responde_ai_possoler" target="_blank" alt="Github"><img src="/img/Github.png"></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <p>© 2021 Posso Ler?. Todos os direitos reservados. Criado e idealizado por Thomaz Ferreira</p>
+                                <p class="copyright-text">Made with ❤ by Thomaz Ferreira</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JS BOOTSTRAP -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+        <!-- LOOTIE JS -->
+        <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+        <!-- MATHJAX JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/core.min.js" integrity="sha512-Vj8DsxZwse5LgmhPlIXhSr/+mwl8OajbZVCr4mX/TcDjwU1ijG6A15cnyRXqZd2mUOQqRk4YbQdc7XhvedWqMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- MEUS JS -->
+        <script src="/js/navJS.js"></script>
+        <script src="/js/inputValidator.js"></script>
+        <script src="/js/axios.js"></script>
+
+    </body>
+</html>
