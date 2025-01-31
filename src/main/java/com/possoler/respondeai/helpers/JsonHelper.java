@@ -17,13 +17,28 @@ public class JsonHelper {
      * @param jsonPropertyName json property name
      * @return jsonPropertyName json key content string
      */
-    public String getObject(JSONObject jsonObject, String jsonPropertyName) {
+    public String getJsonObjectString(JSONObject jsonObject, String jsonPropertyName) {
         try {
             return jsonObject.get(jsonPropertyName).toString();
         }catch(Exception e) {
             throw new ServerErrorException("Falha ao obter objeto " + "\"" + jsonPropertyName + "\"");
         }
     }
+
+    /**
+     * Get json object contents from a property present in a json object
+     * @param jsonObject json object
+     * @param jsonPropertyName json property name
+     * @return jsonPropertyName json key content string
+     */
+    public JSONObject getJsonObject(JSONObject jsonObject, String jsonPropertyName) {
+        try {
+            return (JSONObject) jsonObject.get(jsonPropertyName);
+        }catch(Exception e) {
+            throw new ServerErrorException("Falha ao obter objeto " + "\"" + jsonPropertyName + "\"");
+        }
+    }
+
 
     /**
      * Get string contents from an array property present in a json object

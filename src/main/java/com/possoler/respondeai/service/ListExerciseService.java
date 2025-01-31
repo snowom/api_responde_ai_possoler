@@ -35,7 +35,7 @@ public class ListExerciseService implements RespondeAiService {
     private ExerciseResponseDTO buildListExerciseResponse(String responseBody) {
         JSONObject jsonObject = new JSONObject(responseBody);
 
-        var lightAnswer = jsonHelper.getObject(jsonObject, "lightAnswer");
+        var lightAnswer = jsonHelper.getJsonObjectString(jsonObject, "lightAnswer");
         var videos = buildVideoResponse(jsonObject);
         var lightSolution = buildLightSolutionResponse(jsonObject);
 
@@ -60,8 +60,8 @@ public class ListExerciseService implements RespondeAiService {
         List<JSONObject> videoResponse = jsonHelper.getJsonObjectsFromArray(jsonObject, "videos");
         for (JSONObject object : videoResponse) {
             videos.add(VideoResponseDTO.builder()
-                .providerId(jsonHelper.getObject(object, "providerId"))
-                .provider(jsonHelper.getObject(object, "provider"))
+                .providerId(jsonHelper.getJsonObjectString(object, "providerId"))
+                .provider(jsonHelper.getJsonObjectString(object, "provider"))
                 .build());
         }
         return videos;

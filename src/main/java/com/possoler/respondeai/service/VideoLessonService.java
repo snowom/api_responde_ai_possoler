@@ -3,10 +3,9 @@ package com.possoler.respondeai.service;
 import com.possoler.respondeai.dto.response.video_lesson.CoveredTopicDTO;
 import com.possoler.respondeai.dto.response.video_lesson.VideoDTO;
 import com.possoler.respondeai.dto.response.video_lesson.VideoLessonResponseDTO;
-import com.possoler.respondeai.exceptions.ServerErrorException;
+import com.possoler.respondeai.helpers.JsonHelper;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
 import com.possoler.respondeai.interfaces.RespondeAiService;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -30,8 +29,13 @@ public class VideoLessonService implements RespondeAiService {
     private final String COVERED_TOPIC_THEORY_ID_PROPERTY_NAME = "theoryId";
 
     private final RespondeAiClient respondeAiClient;
+    private final JsonHelper jsonHelper;
 
-    public VideoLessonService(@Qualifier("VideoLessonClient") RespondeAiClient respondeAiClient) {
+    public VideoLessonService(
+        @Qualifier("VideoLessonClient") RespondeAiClient respondeAiClient,
+        JsonHelper jsonHelper
+    ) {
+        this.jsonHelper = jsonHelper;
         this.respondeAiClient = respondeAiClient;
     }
 
@@ -44,76 +48,36 @@ public class VideoLessonService implements RespondeAiService {
     private List<VideoLessonResponseDTO> buildVideoLeassonResponse(String responseBody) {
         var videosResponse = new ArrayList<VideoLessonResponseDTO>();
         var jsonObject = new JSONObject(responseBody);
+        var lectureModes = jsonHelper.getJsonObjectsFromArray(jsonObject, LECTURE_MODULES_PROPERTY_NAME);
 
-        try{
-            var lectureModes = (JSONArray) jsonObject.get(LECTURE_MODULES_PROPERTY_NAME);
-
-            for(int i=0; i< lectureModes.length(); i++) {
-                var coveredTopicArray = lectureModes.getJSONObject(i);
-                var coveredTopics = buildCoveredTopicsResponse(coveredTopicArray);
-                var video = buildVideoResponse(lectureModes.getJSONObject(i));
-
-                videosResponse.add(
-                    VideoLessonResponseDTO.builder()
-                        .video(video)
-                        .coveredTopics(coveredTopics)
-                        .build()
-                );
-            }
-            return videosResponse;
-
-        }catch(Exception e) {
-            throw new ServerErrorException("[Video Leassons] - Falha ao montar objeto \"VideoLessonResponse\"");
+        for (JSONObject lectureMode : lectureModes) {
+            var coveredTopics = buildCoveredTopicsResponse(lectureMode);
+            var video = buildVideoResponse(lectureMode);
+            videosResponse.add(VideoLessonResponseDTO.builder().video(video).coveredTopics(coveredTopics).build());
         }
+        return videosResponse;
     }
 
-
-    private VideoDTO buildVideoResponse(JSONObject jsonArrayObject) {
-        try{
-            var videoName = jsonArrayObject.get(VIDEO_NAME_PROPERTY_NAME).toString();
-            var video = jsonArrayObject.getJSONObject(VIDEO_JSON_PROPERTY_NAME);
-            var videoProvider = video.get(PROVIDER_JSON_PROPERTY_NAME).toString();
-            var videoProviderId = video.get(PROVIDERID_JSON_PROPERTY_NAME).toString();
-
-            return VideoDTO.builder()
-                .name(videoName)
-                .provider(videoProvider)
-                .providerId(videoProviderId)
-                .build();
-
-        }catch(Exception e){
-            throw new ServerErrorException("[Video Leassons] - Falha ao montar objeto \"videos\"");
-        }
+    private VideoDTO buildVideoResponse(JSONObject jsonObject) {
+        var videoName = jsonHelper.getJsonObjectString(jsonObject, VIDEO_NAME_PROPERTY_NAME);
+        var video = jsonHelper.getJsonObject(jsonObject, VIDEO_JSON_PROPERTY_NAME);
+        var videoProvider = jsonHelper.getJsonObjectString(video, PROVIDER_JSON_PROPERTY_NAME);
+        var videoProviderId = jsonHelper.getJsonObjectString(video, PROVIDERID_JSON_PROPERTY_NAME);
+        return VideoDTO.builder().name(videoName).provider(videoProvider).providerId(videoProviderId).build();
     }
-
 
     private List<CoveredTopicDTO> buildCoveredTopicsResponse(JSONObject jsonObject) {
         var coveredTopics = new ArrayList<CoveredTopicDTO>();
-        var coveredTopicsArray = (JSONArray) jsonObject.get(COVERED_TOPIC_PROPERTY_NAME);
+        List<JSONObject> coveredTopicsArray = jsonHelper.getJsonObjectsFromArray(jsonObject, COVERED_TOPIC_PROPERTY_NAME);
 
-        try{
-            for(int i=0; i<coveredTopicsArray.length(); i++) {
-                var currentCoveredTopic = coveredTopicsArray.getJSONObject(i);
-
-                var firstExerciseId = currentCoveredTopic.get(COVERED_TOPIC_FIRST_EXERCISE_ID_PROPERTY_NAME).toString();
-                var id = currentCoveredTopic.get(COVERED_TOPIC_ID_PROPERTY_NAME).toString();
-                var name = currentCoveredTopic.get(COVERED_TOPIC_NAME_PROPERTY_NAME).toString();
-                var subjectId = currentCoveredTopic.get(COVERED_TOPIC_SUBJECT_ID_PROPERTY_NAME).toString();
-                var theoryId = currentCoveredTopic.get(COVERED_TOPIC_THEORY_ID_PROPERTY_NAME).toString();
-
-                coveredTopics.add(
-                    CoveredTopicDTO.builder()
-                        .id(id)
-                        .name(name)
-                        .firstExerciseId(firstExerciseId)
-                        .subjectId(subjectId)
-                        .theoryId(theoryId)
-                        .build()
-                );
-            }
-            return coveredTopics;
-        }catch(Exception e){
-            throw new ServerErrorException("[Video Leassons] - Falha ao montar objeto \"coverageTopic\"");
+        for(JSONObject coveredTopic : coveredTopicsArray) {
+            var firstExerciseId = jsonHelper.getJsonObjectString(coveredTopic, COVERED_TOPIC_FIRST_EXERCISE_ID_PROPERTY_NAME);
+            var id = jsonHelper.getJsonObjectString(coveredTopic, COVERED_TOPIC_ID_PROPERTY_NAME);
+            var name = jsonHelper.getJsonObjectString(coveredTopic, COVERED_TOPIC_NAME_PROPERTY_NAME);
+            var subjectId = jsonHelper.getJsonObjectString(coveredTopic, COVERED_TOPIC_SUBJECT_ID_PROPERTY_NAME);
+            var theoryId = jsonHelper.getJsonObjectString(coveredTopic, COVERED_TOPIC_THEORY_ID_PROPERTY_NAME);
+            coveredTopics.add(CoveredTopicDTO.builder().id(id).name(name).firstExerciseId(firstExerciseId).subjectId(subjectId).theoryId(theoryId).build());
         }
+        return coveredTopics;
     }
 }
