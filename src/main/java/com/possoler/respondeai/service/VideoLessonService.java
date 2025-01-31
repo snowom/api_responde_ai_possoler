@@ -53,13 +53,7 @@ public class VideoLessonService implements RespondeAiService {
         for (JSONObject lectureMode : lectureModes) {
             var coveredTopics = buildCoveredTopicsResponse(lectureMode);
             var video = buildVideoResponse(lectureMode);
-
-            videosResponse.add(
-                VideoLessonResponseDTO.builder()
-                    .video(video)
-                    .coveredTopics(coveredTopics)
-                    .build()
-            );
+            videosResponse.add(VideoLessonResponseDTO.builder().video(video).coveredTopics(coveredTopics).build());
         }
         return videosResponse;
     }
@@ -69,12 +63,7 @@ public class VideoLessonService implements RespondeAiService {
         var video = jsonHelper.getJsonObject(jsonObject, VIDEO_JSON_PROPERTY_NAME);
         var videoProvider = jsonHelper.getJsonObjectString(video, PROVIDER_JSON_PROPERTY_NAME);
         var videoProviderId = jsonHelper.getJsonObjectString(video, PROVIDERID_JSON_PROPERTY_NAME);
-
-        return VideoDTO.builder()
-            .name(videoName)
-            .provider(videoProvider)
-            .providerId(videoProviderId)
-            .build();
+        return VideoDTO.builder().name(videoName).provider(videoProvider).providerId(videoProviderId).build();
     }
 
     private List<CoveredTopicDTO> buildCoveredTopicsResponse(JSONObject jsonObject) {
@@ -87,16 +76,7 @@ public class VideoLessonService implements RespondeAiService {
             var name = jsonHelper.getJsonObjectString(coveredTopic, COVERED_TOPIC_NAME_PROPERTY_NAME);
             var subjectId = jsonHelper.getJsonObjectString(coveredTopic, COVERED_TOPIC_SUBJECT_ID_PROPERTY_NAME);
             var theoryId = jsonHelper.getJsonObjectString(coveredTopic, COVERED_TOPIC_THEORY_ID_PROPERTY_NAME);
-
-            coveredTopics.add(
-                CoveredTopicDTO.builder()
-                    .id(id)
-                    .name(name)
-                    .firstExerciseId(firstExerciseId)
-                    .subjectId(subjectId)
-                    .theoryId(theoryId)
-                    .build()
-            );
+            coveredTopics.add(CoveredTopicDTO.builder().id(id).name(name).firstExerciseId(firstExerciseId).subjectId(subjectId).theoryId(theoryId).build());
         }
         return coveredTopics;
     }
