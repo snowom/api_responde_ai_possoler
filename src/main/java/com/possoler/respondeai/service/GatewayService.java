@@ -60,7 +60,7 @@ public class GatewayService {
         }
         if (gatewayRequestDTO.getUrl().contains(VIDEO_LESSON_PATH)) {
             setItemIdFromDTO(gatewayRequestDTO);
-            return new VideoLessonService(new VideoLessonClient());
+            return new VideoLessonService(new VideoLessonClient(), jsonHelper);
         }
         throw new ClientErrorException("Url inválida ou não suportada pela aplicação");
     }

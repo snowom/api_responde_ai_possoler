@@ -3,11 +3,9 @@ package com.possoler.respondeai.service;
 
 import com.possoler.respondeai.dto.response.TheoryResponseDTO;
 import com.possoler.respondeai.dto.response.VideoResponseDTO;
-import com.possoler.respondeai.exceptions.ServerErrorException;
 import com.possoler.respondeai.helpers.JsonHelper;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
 import com.possoler.respondeai.interfaces.RespondeAiService;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -37,7 +35,7 @@ public class TheoryService implements RespondeAiService {
 
     private TheoryResponseDTO buildTheoryResponse(String responseBody) {
         var jsonObject = new JSONObject(responseBody);
-        var lightBody = jsonHelper.getObject(jsonObject, "lightBody");
+        var lightBody = jsonHelper.getJsonObjectString(jsonObject, "lightBody");
         var videos = buildVideoResponse(jsonObject);
 
         return TheoryResponseDTO.builder()
@@ -51,8 +49,8 @@ public class TheoryService implements RespondeAiService {
         List<JSONObject> videoResponse = jsonHelper.getJsonObjectsFromArray(jsonObject, "videos");
         for (JSONObject object : videoResponse) {
             videos.add(VideoResponseDTO.builder()
-                .providerId(jsonHelper.getObject(object, "providerId"))
-                .provider(jsonHelper.getObject(object, "provider"))
+                .providerId(jsonHelper.getJsonObjectString(object, "providerId"))
+                .provider(jsonHelper.getJsonObjectString(object, "provider"))
                 .build());
         }
         return videos;
