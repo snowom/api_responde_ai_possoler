@@ -140,9 +140,10 @@
                                 <span>Cole o link da página que gostaria de ver sem bloqueios:</span>
                             </p>
                             <form>
-                                <input style="width:" placeholder="https://app.respondeai.com.br/" type="text" class="form-control" aria-describedby="inputGroup-sizing-default">
+                                <input id="input_url" style="width:" placeholder="https://app.respondeai.com.br/" type="text" class="form-control" aria-describedby="inputGroup-sizing-default">
+                                <small id="error_label" class="form-text" style="margin-bottom: 20px !important; display:none !important; color: #ff00009c !important;">URL não suportada ou inválida</small>
                                 <div style="margin-top: 10px !important;">
-                                    <button id="btn_desbloquear" type="button" class="btn btn-success btn-block">Desbloquear</button>
+                                    <button disabled id="btn_unlock" type="button" class="btn btn-success btn-block">Desbloquear</button>
                                 </div>
                             </form>
                         </div>
@@ -196,6 +197,9 @@
         <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
         <!-- MATHJAX JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/core.min.js" integrity="sha512-Vj8DsxZwse5LgmhPlIXhSr/+mwl8OajbZVCr4mX/TcDjwU1ijG6A15cnyRXqZd2mUOQqRk4YbQdc7XhvedWqMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- MEUS JS -->
         <script src="/js/navJS.js"></script>
+        <script src="/js/inputValidator.js"></script>
+        <script src="/js/axios.js"></script>
     </body>
 </html>
