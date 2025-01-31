@@ -33,8 +33,8 @@ public class BookExerciseService implements RespondeAiService {
     private BookExerciseResponseDTO buildBookResponse(String responseBody) {
         JSONObject jsonObject = new JSONObject(responseBody);
         List<String> lightSolution = jsonHelper.getArrayObject(jsonObject, "lightSolution");
-        String lightBody = jsonHelper.getObject(jsonObject, "lightBody");
-        String lightAnswer = jsonHelper.getObject(jsonObject, "lightAnswer");
+        String lightBody = jsonHelper.getJsonObjectString(jsonObject, "lightBody");
+        String lightAnswer = jsonHelper.getJsonObjectString(jsonObject, "lightAnswer");
 
         return BookExerciseResponseDTO.builder()
             .lightBody(lightBody)
