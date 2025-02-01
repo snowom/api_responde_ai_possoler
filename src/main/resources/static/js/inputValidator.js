@@ -150,26 +150,28 @@ btnUnlock.addEventListener("click", ()=>{
                  </div>
              `;
 
-             content += `
-                <div class="row" style="height: 600px !important;">
-                     <div class="col-12">
-                         <h2 style="color: rgb(0, 184, 214) !important; font-size: 1.55em; margin-top: 10px; line-height: 31px; padding-bottom: 30px; margin: 0px; padding: 0px; font-weight: inherit; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px;">Vídeo Aula</h2>
-             `;
+            if (resp.data.videos.length > 0) {
+                content += `
+                    <div class="row" style="height: 600px !important;">
+                         <div class="col-12">
+                             <h2 style="color: rgb(0, 184, 214) !important; font-size: 1.55em; margin-top: 10px; line-height: 31px; padding-bottom: 30px; margin: 0px; padding: 0px; font-weight: inherit; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px;">Vídeo Aula</h2>
+                 `;
 
-             (resp.data.videos).forEach((video) => {
-                content += (video.provider.includes("youtube"))
-                    ? `<div data-cy="video-iframe" allowfullscreen="" frameborder="0" style="width: 100%; height: ${SINGLE_VIDEO_SIZE}px;">
-                           <div style="width: 100%; height: 100%;">
-                               <iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="100%" height="100%" src="https://www.youtube.com/embed/${video.providerId}?autoplay=0&amp;mute=0&amp;controls=1&amp;origin=https%3A%2F%2Fapp.respondeai.com.br&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1&amp;widgetid=1"></iframe>
+                 (resp.data.videos).forEach((video) => {
+                    content += (video.provider.includes("youtube"))
+                        ? `<div data-cy="video-iframe" allowfullscreen="" frameborder="0" style="width: 100%; height: ${SINGLE_VIDEO_SIZE}px;">
+                               <div style="width: 100%; height: 100%;">
+                                   <iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="100%" height="100%" src="https://www.youtube.com/embed/${video.providerId}?autoplay=0&amp;mute=0&amp;controls=1&amp;origin=https%3A%2F%2Fapp.respondeai.com.br&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1&amp;widgetid=1"></iframe>
+                               </div>
                            </div>
-                       </div>
-                       <div style="height: ${SPACE_BETWEEN_VIDEOS}px !important"></div>`
+                           <div style="height: ${SPACE_BETWEEN_VIDEOS}px !important"></div>`
 
-                    : `<div style="padding:56.25% 0 0 0;position:relative;">
-                         <iframe src="https://player.vimeo.com/video/${video.providerId}" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                       </div>
-                       <div style="height: ${SPACE_BETWEEN_VIDEOS}px !important"></div>`;
-             });
+                        : `<div style="padding:56.25% 0 0 0;position:relative;">
+                             <iframe src="https://player.vimeo.com/video/${video.providerId}" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                           </div>
+                           <div style="height: ${SPACE_BETWEEN_VIDEOS}px !important"></div>`;
+                 });
+            }
             content += `</div></div>`;
             cardContent.innerHTML = content;
             return;
