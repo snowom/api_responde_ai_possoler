@@ -1,0 +1,58 @@
+.defaultExercise {
+    padding: 0px 30px 60px;
+    font-size: 1.05em;
+    position: relative;
+    margin: 30px 0px;
+    box-sizing: border-box;
+}
+
+.defaultExercise h2 {
+   color: rgb(247, 172, 60) !important;
+   font-size: 1.5em;
+   font-family: "Droid Serif", serif;
+   margin: 0;
+   font-size: inherit;
+   font-weight: inherit;
+   display: block;
+   font-size: 1.5em;
+   margin-block-start: 0.83em;
+   margin-block-end: 0.83em;
+   margin-inline-start: 0px;
+   margin-inline-end: 0px;
+   unicode-bidi: isolate;
+}
+
+.defaultExercise p {
+    text-align: left;
+    overflow: auto hidden;
+    font-size: 1.25em;
+    line-height: 26px;
+    color: rgb(68, 68, 68);
+    padding-bottom: 15px;
+    font-family: "Droid Serif", serif;
+    font-weight: 400;
+    margin: 0px;
+    padding: 0px;
+    font-style: normal;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+.defaultExercise img {
+    max-width: 804px;
+    margin: 0px auto;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+    display: block;
+}
+
+.defaultExercise div {
+    display: block;
+    unicode-bidi: isolate;
+}

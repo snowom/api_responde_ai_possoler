@@ -55,7 +55,28 @@ btnUnlock.addEventListener("click", ()=>{
             return;
         }
         if (resp.data.resourceType == "exercise") {
-            //TODO: IMPLEMENTAÇÃO BOOK EXERCISE
+            cardContent.classList.add("defaultExercise");
+
+            let content = `<div style='flex: 1 1 0%; align-self: center; background-color: white; width: 100%'>`;
+            content += `<div style='padding: 0px 30px;'>`;
+            content += `<div style="margin: 60px 0px;">`;
+            content += `<h2>Enunciado</h2>`;
+            content += `<div style='margin: 30px 0px; 60px;'>ENUNCIADO AQUI</div>`
+            content += `</div>`;
+
+            resp.data.lightSolution.forEach((step, index) => {
+                let currentStep = index += 1;
+                content += `<div style="margin: 60px 0px;">`;
+                content += `<h2>Passo ${currentStep}</h2>`;
+                content += `<div style='margin: 30px 0px; 60px;'>${step}</div>`;
+                content += `</div>`;
+            });
+
+            content += `<div style='margin: 30px 0px;'>`;
+            content += `<h2>Resposta</h2>`;
+            content += `<div style='border-left: 4px solid rgb(247, 172, 60); padding: 20px; font-size: 1.2em;'><div style='margin: 30px 0px;'>${resp.data.lightAnswer}</div></div>`;
+            content += `</div></div></div>`;
+            cardContent.innerHTML = content;
             return;
         }
         if (resp.data.resourceType == "list_exercise") {
