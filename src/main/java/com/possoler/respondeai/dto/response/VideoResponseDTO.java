@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VideoResponseDTO {
+    private String resourceType;
     @JsonProperty("provider")
     private String provider;
     @JsonProperty("providerId")

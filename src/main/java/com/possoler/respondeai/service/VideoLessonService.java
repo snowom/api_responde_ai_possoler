@@ -2,6 +2,7 @@ package com.possoler.respondeai.service;
 
 import com.possoler.respondeai.dto.response.video_lesson.CoveredTopicDTO;
 import com.possoler.respondeai.dto.response.video_lesson.VideoDTO;
+import com.possoler.respondeai.dto.response.video_lesson.VideoLessonDTO;
 import com.possoler.respondeai.dto.response.video_lesson.VideoLessonResponseDTO;
 import com.possoler.respondeai.helpers.JsonHelper;
 import com.possoler.respondeai.interfaces.RespondeAiClient;
@@ -45,17 +46,18 @@ public class VideoLessonService implements RespondeAiService {
         return buildVideoLeassonResponse(response.toString());
     }
 
-    private List<VideoLessonResponseDTO> buildVideoLeassonResponse(String responseBody) {
-        var videosResponse = new ArrayList<VideoLessonResponseDTO>();
+    private VideoLessonResponseDTO buildVideoLeassonResponse(String responseBody) {
+        var videosResponse = new ArrayList<VideoLessonDTO>();
         var jsonObject = new JSONObject(responseBody);
         var lectureModes = jsonHelper.getJsonObjectsFromArray(jsonObject, LECTURE_MODULES_PROPERTY_NAME);
 
         for (JSONObject lectureMode : lectureModes) {
             var coveredTopics = buildCoveredTopicsResponse(lectureMode);
             var video = buildVideoResponse(lectureMode);
-            videosResponse.add(VideoLessonResponseDTO.builder().video(video).coveredTopics(coveredTopics).build());
+            VideoLessonDTO.builder().video(video).coveredTopics(coveredTopics).build();
+            videosResponse.add(VideoLessonDTO.builder().video(video).coveredTopics(coveredTopics).build());
         }
-        return videosResponse;
+        return VideoLessonResponseDTO.builder().resourceType("video").videoLessonDTO(videosResponse).build();
     }
 
     private VideoDTO buildVideoResponse(JSONObject jsonObject) {
