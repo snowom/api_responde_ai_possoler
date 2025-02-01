@@ -27,6 +27,10 @@ btnUnlock.addEventListener("click", ()=>{
     }).then((resp) => {
         //TODO: LOGICA Request Sucesso
     }).catch((erro) => {
+        if (erro.response.status == 401) {
+            setInvalidOrExpiredTokenBlock();
+            return;
+        }
         setErrorResponseBlock(erro.toString());
         errorLabel.style.display = "block"
         inputUrl.style.borderColor = "#ff00009c"
@@ -81,6 +85,22 @@ function setErrorResponseBlock(errorMessage) {
                  <center>
                      <p class="lead">URL não suportada ou inválida</p>
                      <small class="form-text" style="margin-bottom: 20px !important;">${errorMessage}</small>
+                 </center>
+             </div>
+         </div>
+     `;
+}
+
+function setInvalidOrExpiredTokenBlock() {
+    cardContent.innerHTML = `
+        <div class="row">
+             <div class="col-12">
+                 <div class="container-fluid d-flex justify-content-center">
+                     <dotlottie-player src="https://assets9.lottiefiles.com/packages/lf20_csi2q9oq.json" loop background="transparent" speed="1" style="width: 300px; height: 300px" autoplay></dotlottie-player>
+                 </div>
+                 <center>
+                     <p class="lead">Token inválido ou expirado</p>
+                     <small class="form-text" style="margin-bottom: 20px !important;">Atualize seu token de acesso <a href="">aqui</a> antes de tentar novamente</small>
                  </center>
              </div>
          </div>
