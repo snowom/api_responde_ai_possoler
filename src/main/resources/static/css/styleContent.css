@@ -1,0 +1,4 @@
+.enableOverflow p {
+    overflow-x: auto !important;
+    overflow-y: clip !important;
+}
