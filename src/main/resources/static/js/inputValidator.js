@@ -42,6 +42,7 @@ btnUnlock.addEventListener("click", ()=>{
             return;
         }
         if (resp.data.resourceType == "theory") {
+            cardContent.classList.add("defaultTheory");
             const SINGLE_VIDEO_SIZE = 450;
             const SPACE_BETWEEN_VIDEOS = 50;
             let totalHeight = (SINGLE_VIDEO_SIZE*resp.data.videos.length) + (SPACE_BETWEEN_VIDEOS*resp.data.videos.length);
