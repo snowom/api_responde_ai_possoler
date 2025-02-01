@@ -31,7 +31,6 @@ btnUnlock.addEventListener("click", ()=>{
         }
         if (resp.data.resourceType == "book_exercise") {
             cardContent.classList.add("defaultBookExercise");
-            const STYLE_DIV_RESPOSTA = 'border-left: 4px solid rgb(54, 170, 173); padding: 20px; font-size: 1.2em;';
 
             let content = `<div style='flex: 1 1 0%; align-self: center; background-color: white; width: 100%'>`;
             content += `<div style='padding: 0px 30px;'>`;
@@ -50,7 +49,7 @@ btnUnlock.addEventListener("click", ()=>{
 
             content += `<div style='margin: 30px 0px;'>`;
             content += `<h2>Resposta</h2>`;
-            content += `<div style='${STYLE_DIV_RESPOSTA}'><div style='margin: 30px 0px;'>${resp.data.lightAnswer}</div></div>`;
+            content += `<div style='border-left: 4px solid rgb(54, 170, 173); padding: 20px; font-size: 1.2em;'><div style='margin: 30px 0px;'>${resp.data.lightAnswer}</div></div>`;
             content += `</div></div></div>`;
             cardContent.innerHTML = content;
             return;
