@@ -58,7 +58,7 @@ btnUnlock.addEventListener("click", ()=>{
              content += `
                 <div class="row" style="height: 600px !important;">
                      <div class="col-12">
-                         <h1 style="color: #00b8d6; font-size: 1.7em; font-family:Droid Serif, serif; font-weight: inherit; margin: 50px 0px 30px 0px">Vídeo Aula</h1>
+                         <h2 style="color: rgb(0, 184, 214) !important; font-size: 1.55em; margin-top: 10px; line-height: 31px; padding-bottom: 30px; margin: 0px; padding: 0px; font-weight: inherit; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px;">Vídeo Aula</h2>
              `;
 
              (resp.data.videos).forEach((video) => {
