@@ -61,7 +61,7 @@ btnUnlock.addEventListener("click", ()=>{
             content += `<div style='padding: 0px 30px;'>`;
             content += `<div style="margin: 60px 0px;">`;
             content += `<h2>Enunciado</h2>`;
-            content += `<div style='margin: 30px 0px; 60px;'>ENUNCIADO AQUI</div>`
+            content += `<div style='margin: 30px 0px; 60px;'>${resp.data.lightBody}</div>`
             content += `</div>`;
 
             resp.data.lightSolution.forEach((step, index) => {
