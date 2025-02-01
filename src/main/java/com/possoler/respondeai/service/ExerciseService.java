@@ -40,6 +40,7 @@ public class ExerciseService implements RespondeAiService {
         var lightSolution = buildLightSolutionResponse(jsonObject);
 
         return ExerciseResponseDTO.builder()
+            .resourceType("exercise")
             .lightSolution(lightSolution)
             .lightAnswer(lightAnswer)
             .videos(videos)

@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
-public class VideoLessonResponseDTO {
-    private String resourceType;
-    private List<VideoLessonDTO> videoLessonDTO;
+public class VideoLessonDTO {
+    private VideoDTO video;
+    private List<CoveredTopicDTO> coveredTopics;
 }

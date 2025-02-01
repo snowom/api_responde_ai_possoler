@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TheoryResponseDTO {
+    private String resourceType;
     private String lightBody;
     private List<VideoResponseDTO> videos;
 }

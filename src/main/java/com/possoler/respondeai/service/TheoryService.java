@@ -39,6 +39,7 @@ public class TheoryService implements RespondeAiService {
         var videos = buildVideoResponse(jsonObject);
 
         return TheoryResponseDTO.builder()
+            .resourceType("theory")
             .lightBody(lightBody)
             .videos(videos)
             .build();

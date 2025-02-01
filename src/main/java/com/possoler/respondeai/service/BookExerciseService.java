@@ -37,6 +37,7 @@ public class BookExerciseService implements RespondeAiService {
         String lightAnswer = jsonHelper.getJsonObjectString(jsonObject, "lightAnswer");
 
         return BookExerciseResponseDTO.builder()
+            .resourceType("book_exercise")
             .lightBody(lightBody)
             .lightAnswer(lightAnswer)
             .lightSolution(lightSolution)
