@@ -28,11 +28,11 @@ btnUnlock.addEventListener("click", ()=>{
         }),
         headers: {
             "Content-Type" : "application/json",
-            "Authorization" : "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4Mzk5NTIwfQ.Nyh8RFXvR3dFPxR6MNRNToaSESqbPFLZ2ar4dQdsFMU"
+            "Authorization" : "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NTUzODcwfQ.7kko05puZG9135AH_PGRsnIAOnpZPxFx3v6lhFnsrQI"
         }
     }).then((resp) => {
         if (resp.data.resourceType == "video") {
-            //TODO: IMPLEMENTAÇÃO AULÃO
+
             return;
         }
         if (resp.data.resourceType == "book_exercise") {
