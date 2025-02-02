@@ -5,7 +5,7 @@ let cardContent = document.getElementById("card_content");
 
 
 btnUnlock.addEventListener("click", ()=>{
-    cardContent.classList.remove("xpto");
+    cardContent.classList.remove("defaultVideoLesson");
     cardContent.classList.remove("defaultBookExercise");
     cardContent.classList.remove("defaultExercise");
     cardContent.classList.remove("defaultListExercise");
@@ -28,11 +28,39 @@ btnUnlock.addEventListener("click", ()=>{
         }),
         headers: {
             "Content-Type" : "application/json",
-            "Authorization" : "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NTUzODcwfQ.7kko05puZG9135AH_PGRsnIAOnpZPxFx3v6lhFnsrQI"
+            "Authorization" : "yJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NTUzODcwfQ.7kko05puZG9135AH_PGRsnIAOnpZPxFx3v6lhFnsrQI"
         }
     }).then((resp) => {
         if (resp.data.resourceType == "video") {
+            cardContent.classList.add("defaultVideoLesson");
 
+            let content = `
+                <div class="glide videoLessons ">
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides">`;
+
+            resp.data.video_lessons.forEach((videoLesson, index) => {
+                let video = videoLesson.video;
+
+                content += (video.provider.includes("youtube"))
+                    ? `<li class="glide__slide">
+                           <div data-cy="video-iframe" allowfullscreen="" frameborder="0" style="width: 100%; height: ${SINGLE_VIDEO_SIZE}px;">
+                               <div style="width: 100%; height: 100%;">
+                                   <iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="100%" height="100%" src="https://www.youtube.com/embed/${video.providerId}?autoplay=0&amp;mute=0&amp;controls=1&amp;origin=https%3A%2F%2Fapp.respondeai.com.br&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1&amp;widgetid=1"></iframe>
+                               </div>
+                           </div>
+                           <p>TODO: mountVideoDescriptionData(video, object.coveredTopics, index+1)</p>
+                       </li>`
+                    : `<li class="glide__slide">
+                           <div style="padding:56.25% 0 0 0;position:relative;">
+                               <iframe src="https://player.vimeo.com/video/${video.providerId}" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                           </div>
+                           <p>TODO: mountVideoDescriptionData(video, object.coveredTopics, index+1)</p>
+                       </li>`;
+            });
+            content += `</ul></div></div><p>TODO: mountVideoControls()</p>`;
+            cardContent.innerHTML = content;
+            //initGlideLibrary();
             return;
         }
         if (resp.data.resourceType == "book_exercise") {
@@ -292,4 +320,20 @@ function setRandomLoadLottieAnimation() {
     ]
     let randNumber = Math.floor(Math.random() * lottieAnimations.length)
     return lottieAnimations[randNumber];
+}
+
+function initGlideLibrary() {
+    try{
+        let configs = {
+            type: "carousel",
+            perView: 1,
+            focusAt: "center"
+        };
+
+        var glide = new Glide(".videoLessons", configs);
+        glide.on(["mount.after", "run"], () => {});
+        glide.mount();
+    }catch(erro){
+       console.error(`Error on init GlideJS library - ${erro.toString()}`);
+    }
 }
