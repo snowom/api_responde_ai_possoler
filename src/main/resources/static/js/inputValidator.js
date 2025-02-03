@@ -28,13 +28,20 @@ btnUnlock.addEventListener("click", ()=>{
         }),
         headers: {
             "Content-Type" : "application/json",
-            "Authorization" : "yJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NTUzODcwfQ.7kko05puZG9135AH_PGRsnIAOnpZPxFx3v6lhFnsrQI"
+            "Authorization" : "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NTUzODcwfQ.7kko05puZG9135AH_PGRsnIAOnpZPxFx3v6lhFnsrQI"
         }
     }).then((resp) => {
         if (resp.data.resourceType == "video") {
             cardContent.classList.add("defaultVideoLesson");
 
             let content = `
+                <div class="titleLesson">
+                    <center>
+                        <p>AULÃO DE Funções de Várias Variáveis</p>
+                    </center>
+                </div>`;
+
+            content += `
                 <div class="glide videoLessons ">
                     <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides">`;
@@ -44,23 +51,24 @@ btnUnlock.addEventListener("click", ()=>{
 
                 content += (video.provider.includes("youtube"))
                     ? `<li class="glide__slide">
-                           <div data-cy="video-iframe" allowfullscreen="" frameborder="0" style="width: 100%; height: ${SINGLE_VIDEO_SIZE}px;">
+                           <div data-cy="video-iframe" allowfullscreen="" frameborder="0" style="width: 100%; height: 550px;">
                                <div style="width: 100%; height: 100%;">
                                    <iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="100%" height="100%" src="https://www.youtube.com/embed/${video.providerId}?autoplay=0&amp;mute=0&amp;controls=1&amp;origin=https%3A%2F%2Fapp.respondeai.com.br&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1&amp;widgetid=1"></iframe>
                                </div>
                            </div>
-                           <p>TODO: mountVideoDescriptionData(video, object.coveredTopics, index+1)</p>
+                           ${mountVideoDescriptionData(video, videoLesson.coveredTopics, index+1)}
                        </li>`
                     : `<li class="glide__slide">
-                           <div style="padding:56.25% 0 0 0;position:relative;">
+                           <div style="width: 100%; height: 550px;">
                                <iframe src="https://player.vimeo.com/video/${video.providerId}" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                            </div>
-                           <p>TODO: mountVideoDescriptionData(video, object.coveredTopics, index+1)</p>
+                           ${mountVideoDescriptionData(video, videoLesson.coveredTopics, index+1)}
                        </li>`;
             });
-            content += `</ul></div></div><p>TODO: mountVideoControls()</p>`;
+            content += `</ul></div></div><p>${mountVideoControls()}</p>`;
+
             cardContent.innerHTML = content;
-            //initGlideLibrary();
+            initGlideLibrary();
             return;
         }
         if (resp.data.resourceType == "book_exercise") {
@@ -231,7 +239,7 @@ btnUnlock.addEventListener("click", ()=>{
             return;
         }
     }).catch((erro) => {
-        if (erro.response.status == 401) {
+        if (erro.toString().includes("status code 401")) {
             setInvalidOrExpiredTokenBlock();
             return;
         }
@@ -320,6 +328,68 @@ function setRandomLoadLottieAnimation() {
     ]
     let randNumber = Math.floor(Math.random() * lottieAnimations.length)
     return lottieAnimations[randNumber];
+}
+
+function mountVideoControls() {
+    return `
+        <div class="glide__arrows" data-glide-el="controls">
+            <button id="btnGlidePrev" class="glide__arrow glide__arrow--left" data-glide-dir="<" style="background-color:rgb(0 0 0 / 50%) !important; border: 3px solid rgb(162 255 0 / 91%) !important;">
+                <span class="fas fa-arrow-left">&#10094;</span>
+            </button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">" style="background-color:rgb(0 0 0 / 50%) !important; border: 3px solid rgb(162 255 0 / 91%) !important;">
+                <span class="fas fa-arrow-right">&#10095;</span>
+            </button>
+        </div>`;
+}
+
+function mountVideoDescriptionData(videoObject, coveredTopics, index) {
+    let content = ``;
+
+    coveredTopics.forEach((topic)=> {
+        content += `
+            <li style="display: flex; -webkit-box-pack: justify; justify-content: space-between; -webkit-box-align: center; align-items: center; height: 30px;">
+               <div class="row" style="margin-top: 30px !important;">
+                   <div class="col-12">
+                       <svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24" class="sc-lmgjyN iRXdY" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                           <path d="M6 6C6 5.44772 6.44772 5 7 5H17C17.5523 5 18 5.44772 18 6C18 6.55228 17.5523 7 17 7H7C6.44771 7 6 6.55228 6 6Z" fill="currentColor"></path>
+                           <path d="M6 10C6 9.44771 6.44772 9 7 9H17C17.5523 9 18 9.44771 18 10C18 10.5523 17.5523 11 17 11H7C6.44771 11 6 10.5523 6 10Z" fill="currentColor"></path>
+                           <path d="M7 13C6.44772 13 6 13.4477 6 14C6 14.5523 6.44771 15 7 15H17C17.5523 15 18 14.5523 18 14C18 13.4477 17.5523 13 17 13H7Z" fill="currentColor"></path>
+                           <path d="M6 18C6 17.4477 6.44772 17 7 17H11C11.5523 17 12 17.4477 12 18C12 18.5523 11.5523 19 11 19H7C6.44772 19 6 18.5523 6 18Z" fill="currentColor"></path>
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M2 4C2 2.34315 3.34315 1 5 1H19C20.6569 1 22 2.34315 22 4V20C22 21.6569 20.6569 23 19 23H5C3.34315 23 2 21.6569 2 20V4ZM5 3H19C19.5523 3 20 3.44771 20 4V20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V4C4 3.44772 4.44771 3 5 3Z" fill="currentColor"></path>
+                       </svg>
+                       <span>${topic.name}</span>
+                   </div>
+                   <div class="col-12" style="margin-top: 15px !important;">
+                       <div class="topicList" style="height: 100% !important; margin-right: 10px !important; position: relative !important;">
+                          <a style="display: inline-block !important; width: 110px !important; height: 26px !important; text-align: center !important; border: 1px solid rgb(221, 221, 221) !important; color: inherit !important; text-decoration: none !important; font-size: 0.9em !important; margin: 2px !important; line-height: 24px !important; cursor: pointer !important;" href="/aprender/topico/${topic.subjectId}/${topic.id}/teoria/${topic.theoryId}">Aprender +</a>
+                          <a style="display: inline-block !important; width: 110px !important; height: 26px !important; text-align: center !important; border: 1px solid rgb(221, 221, 221) !important; color: inherit !important; text-decoration: none !important; font-size: 0.9em !important; margin: 2px !important; line-height: 24px !important; cursor: pointer !important;" href="/aprender/topico/${topic.subjectId}/${topic.id}/exercicio/${topic.firstExerciseId}">Praticar +</a>
+                      </div>
+                   </div>
+               </div>
+           </li>`
+    });
+
+    return `
+        <div style="min-height: 300px !important; width: 100% !important; padding: 30px !important;">
+           <p id="dicaTutorial" style="text-align: center !important; margin: 25px 0px !important;">
+               <em style="color: #000 !important">
+                   <strong>Dica: </strong>
+                   <span>Clique e arraste horizontalmente para mudar de video aula</span>
+               </em>
+           </p>
+           <div style="display: flex !important; -webkit-box-pack: justify !important; justify-content: space-between !important;">
+               <div style="font-size: 1.2em !important; color: rgb(249, 172, 62) !important; display: flex !important;">
+                   <div style="width: 38px !important; height: 38px !important; border-radius: 50% !important; font-size: 1.2em !important; font-weight: bold !important; color: rgb(255, 255, 255) !important; background: rgb(249, 172, 62) !important; margin: 0px 10px 0px -10px !important; display: flex !important; -webkit-box-align: center !important; align-items: center !important; -webkit-box-pack: center !important; justify-content: center !important;">${index}</div>
+                   <div style="font-size: 1.2em !important; color: rgb(249, 172, 62) !important; line-height: 38px; !important">${videoObject.name}</div>
+               </div>
+           </div>
+           <div>
+               <div style="font-size: 0.7em !important; color: rgb(51, 51, 51) !important; text-transform: uppercase !important; margin: 30px 10px !important;">Tópicos abordados no módulo ${index}</div>
+               <ul style="list-style-position: inside !important; padding: 0 !important;">
+                   ${content}
+               </ul>
+           </div>
+       </div>`;
 }
 
 function initGlideLibrary() {
