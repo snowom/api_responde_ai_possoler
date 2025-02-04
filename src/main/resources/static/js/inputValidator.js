@@ -37,7 +37,7 @@ btnUnlock.addEventListener("click", ()=>{
             let content = `
                 <div class="titleLesson">
                     <center>
-                        <p>AULÃO DE Funções de Várias Variáveis</p>
+                        <p>AULÃO DE ${resp.data.lesson_name}</p>
                     </center>
                 </div>`;
 
@@ -362,7 +362,7 @@ function mountVideoDescriptionData(videoObject, coveredTopics, index) {
            <p id="dicaTutorial" style="text-align: center !important; margin: 25px 0px !important;">
                <em style="color: #000 !important">
                    <strong>Dica: </strong>
-                   <span>Clique e arraste horizontalmente para mudar de video aula</span>
+                   <span>Clique e arraste horizontalmente para mudar de video aula ou use os direcionais do teclado</span>
                </em>
            </p>
            <div style="display: flex !important; -webkit-box-pack: justify !important; justify-content: space-between !important;">

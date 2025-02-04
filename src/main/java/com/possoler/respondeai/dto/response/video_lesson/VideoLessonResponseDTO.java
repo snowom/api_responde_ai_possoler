@@ -12,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class VideoLessonResponseDTO {
     private String resourceType;
+    @JsonProperty(value = "lesson_name")
+    private String lessonName;
     @JsonProperty(value = "video_lessons")
     private List<VideoLessonDTO> videoLessonDTO;
 }
