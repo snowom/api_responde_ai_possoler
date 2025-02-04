@@ -28,7 +28,7 @@ btnUnlock.addEventListener("click", ()=>{
         }),
         headers: {
             "Content-Type" : "application/json",
-            "Authorization" : "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NTUzODcwfQ.7kko05puZG9135AH_PGRsnIAOnpZPxFx3v6lhFnsrQI"
+            "Authorization" : "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NjUyNTU0fQ.mc0Q_K1Fz3YtZHKHuZP2q3BPBNJRc0fTEbSc5aDS6rU",
         }
     }).then((resp) => {
         if (resp.data.resourceType == "video") {
@@ -65,7 +65,7 @@ btnUnlock.addEventListener("click", ()=>{
                            ${mountVideoDescriptionData(video, videoLesson.coveredTopics, index+1)}
                        </li>`;
             });
-            content += `</ul></div></div><p>${mountVideoControls()}</p>`;
+            content += `</ul></div></div>`;
 
             cardContent.innerHTML = content;
             initGlideLibrary();
@@ -330,25 +330,13 @@ function setRandomLoadLottieAnimation() {
     return lottieAnimations[randNumber];
 }
 
-function mountVideoControls() {
-    return `
-        <div class="glide__arrows" data-glide-el="controls">
-            <button id="btnGlidePrev" class="glide__arrow glide__arrow--left" data-glide-dir="<" style="background-color:rgb(0 0 0 / 50%) !important; border: 3px solid rgb(162 255 0 / 91%) !important;">
-                <span class="fas fa-arrow-left">&#10094;</span>
-            </button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">" style="background-color:rgb(0 0 0 / 50%) !important; border: 3px solid rgb(162 255 0 / 91%) !important;">
-                <span class="fas fa-arrow-right">&#10095;</span>
-            </button>
-        </div>`;
-}
-
 function mountVideoDescriptionData(videoObject, coveredTopics, index) {
     let content = ``;
 
     coveredTopics.forEach((topic)=> {
         content += `
-            <li style="display: flex; -webkit-box-pack: justify; justify-content: space-between; -webkit-box-align: center; align-items: center; height: 30px;">
-               <div class="row" style="margin-top: 30px !important;">
+            <li style="margin: 30px 0px !important; display: flex; -webkit-box-pack: justify; justify-content: space-between; -webkit-box-align: center; align-items: center; height: 30px;">
+               <div class="row">
                    <div class="col-12">
                        <svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24" class="sc-lmgjyN iRXdY" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                            <path d="M6 6C6 5.44772 6.44772 5 7 5H17C17.5523 5 18 5.44772 18 6C18 6.55228 17.5523 7 17 7H7C6.44771 7 6 6.55228 6 6Z" fill="currentColor"></path>
@@ -366,7 +354,7 @@ function mountVideoDescriptionData(videoObject, coveredTopics, index) {
                       </div>
                    </div>
                </div>
-           </li>`
+           </li>`;
     });
 
     return `
@@ -383,11 +371,15 @@ function mountVideoDescriptionData(videoObject, coveredTopics, index) {
                    <div style="font-size: 1.2em !important; color: rgb(249, 172, 62) !important; line-height: 38px; !important">${videoObject.name}</div>
                </div>
            </div>
-           <div>
-               <div style="font-size: 0.7em !important; color: rgb(51, 51, 51) !important; text-transform: uppercase !important; margin: 30px 10px !important;">Tópicos abordados no módulo ${index}</div>
-               <ul style="list-style-position: inside !important; padding: 0 !important;">
-                   ${content}
-               </ul>
+           <div class="row">
+               <div class="col-12">
+                   <div style="font-size: 0.7em !important; color: rgb(51, 51, 51) !important; text-transform: uppercase !important; margin: 30px 10px !important;">Tópicos abordados no módulo ${index}</div>
+               </div>
+               <div class="col-12">
+                   <ul style="display: flex; flex-direction: column; gap: 10px; list-style-position: inside !important; padding: 0 !important;">
+                     ${content}
+                  </ul>
+               </div>
            </div>
        </div>`;
 }
