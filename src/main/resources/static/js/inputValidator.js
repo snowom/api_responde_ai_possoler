@@ -28,7 +28,7 @@ btnUnlock.addEventListener("click", ()=>{
         }),
         headers: {
             "Content-Type" : "application/json",
-            "Authorization" : "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NjUyNTU0fQ.mc0Q_K1Fz3YtZHKHuZP2q3BPBNJRc0fTEbSc5aDS6rU",
+            "Authorization" : "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NzQ1MTUzfQ.rt3GKiwnh99ZX4haiLi1MRXxqNOic7JCIkxZzlGsH-Q",
         }
     }).then((resp) => {
         if (resp.data.resourceType == "video") {
@@ -349,8 +349,8 @@ function mountVideoDescriptionData(videoObject, coveredTopics, index) {
                    </div>
                    <div class="col-12" style="margin-top: 15px !important;">
                        <div class="topicList" style="height: 100% !important; margin-right: 10px !important; position: relative !important;">
-                          <a style="display: inline-block !important; width: 110px !important; height: 26px !important; text-align: center !important; border: 1px solid rgb(221, 221, 221) !important; color: inherit !important; text-decoration: none !important; font-size: 0.9em !important; margin: 2px !important; line-height: 24px !important; cursor: pointer !important;" href="/aprender/topico/${topic.subjectId}/${topic.id}/teoria/${topic.theoryId}">Aprender +</a>
-                          <a style="display: inline-block !important; width: 110px !important; height: 26px !important; text-align: center !important; border: 1px solid rgb(221, 221, 221) !important; color: inherit !important; text-decoration: none !important; font-size: 0.9em !important; margin: 2px !important; line-height: 24px !important; cursor: pointer !important;" href="/aprender/topico/${topic.subjectId}/${topic.id}/exercicio/${topic.firstExerciseId}">Praticar +</a>
+                          <span id="${topic.id}_${topic.theoryId}" onclick="copyValueToClipboard('${topic.id}_${topic.theoryId}')" style="display: inline-block !important; width: 110px !important; height: 26px !important; text-align: center !important; border: 1px solid rgb(221, 221, 221) !important; color: inherit !important; text-decoration: none !important; font-size: 0.9em !important; margin: 2px !important; line-height: 24px !important; cursor: pointer !important;" value="https://app.respondeai.com.br/aprender/topico/${topic.subjectId}/${topic.id}/teoria/${topic.theoryId}">Aprender +</span>
+                          <span id="${topic.id}_${topic.firstExerciseId}" onclick="copyValueToClipboard('${topic.id}_${topic.firstExerciseId}')" style="display: inline-block !important; width: 110px !important; height: 26px !important; text-align: center !important; border: 1px solid rgb(221, 221, 221) !important; color: inherit !important; text-decoration: none !important; font-size: 0.9em !important; margin: 2px !important; line-height: 24px !important; cursor: pointer !important;" value="https://app.respondeai.com.br/aprender/topico/${topic.subjectId}/${topic.id}/exercicio/${topic.firstExerciseId}">Praticar +</span>
                       </div>
                    </div>
                </div>
@@ -382,6 +382,11 @@ function mountVideoDescriptionData(videoObject, coveredTopics, index) {
                </div>
            </div>
        </div>`;
+}
+
+function copyValueToClipboard(elementName) {
+    let element = document.getElementById(elementName);
+    alert(element.getAttribute("value"));
 }
 
 function initGlideLibrary() {
