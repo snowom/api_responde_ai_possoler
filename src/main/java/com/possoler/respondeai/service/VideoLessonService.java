@@ -28,6 +28,9 @@ public class VideoLessonService implements RespondeAiService {
     private final String COVERED_TOPIC_NAME_PROPERTY_NAME = "name";
     private final String COVERED_TOPIC_SUBJECT_ID_PROPERTY_NAME = "subjectId";
     private final String COVERED_TOPIC_THEORY_ID_PROPERTY_NAME = "theoryId";
+    private final String SUBJECT_PROPERTY_NAME = "subject";
+    private final String LESSON_NAME_PROPERTY_NAME = "name";
+    private final String RESOURCE_TYPE = "video";
 
     private final RespondeAiClient respondeAiClient;
     private final JsonHelper jsonHelper;
@@ -50,6 +53,8 @@ public class VideoLessonService implements RespondeAiService {
         var videosResponse = new ArrayList<VideoLessonDTO>();
         var jsonObject = new JSONObject(responseBody);
         var lectureModes = jsonHelper.getJsonObjectsFromArray(jsonObject, LECTURE_MODULES_PROPERTY_NAME);
+        var subject = jsonHelper.getJsonObject(jsonObject, SUBJECT_PROPERTY_NAME);
+        var lessonName = jsonHelper.getJsonObjectString(subject, LESSON_NAME_PROPERTY_NAME);
 
         for (JSONObject lectureMode : lectureModes) {
             var coveredTopics = buildCoveredTopicsResponse(lectureMode);
@@ -57,7 +62,7 @@ public class VideoLessonService implements RespondeAiService {
             VideoLessonDTO.builder().video(video).coveredTopics(coveredTopics).build();
             videosResponse.add(VideoLessonDTO.builder().video(video).coveredTopics(coveredTopics).build());
         }
-        return VideoLessonResponseDTO.builder().resourceType("video").videoLessonDTO(videosResponse).build();
+        return VideoLessonResponseDTO.builder().lessonName(lessonName).resourceType(RESOURCE_TYPE).videoLessonDTO(videosResponse).build();
     }
 
     private VideoDTO buildVideoResponse(JSONObject jsonObject) {
