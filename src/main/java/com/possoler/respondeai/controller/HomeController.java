@@ -9,17 +9,19 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
+    private ModelAndView mv;
+
     @GetMapping("/")
-    public ModelAndView index() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("index");
+    public ModelAndView home() {
+        mv = new ModelAndView();
+        mv.setViewName("home");
         return mv;
     }
 
-    @GetMapping("/home")
-    public ModelAndView home() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("home");
+    @GetMapping("/token")
+    public ModelAndView token() {
+        mv = new ModelAndView();
+        mv.setViewName("token");
         return mv;
     }
 }

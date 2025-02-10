@@ -134,32 +134,23 @@
         <div id="page_content" class="page_content">
             <div class="container-fluid">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-center">
-                            <img class="img-fluid" src="/img/possoler_logo.png" style="height: 350px;">
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: -15px !important; margin-bottom: 60px !important;">
+                    <div class="row mt-3" style="margin-bottom: 60px !important">
                         <div class="col-12 text-center">
-                            <span class="lead">
-                                <h4 style="font-size: 4rem !important; font-weight: 300 !important; line-height: 1.2 !important;">Posso Ler?</h4>
-                            </span>
-                            <span class="lead">
-                                <h4 style="font-size: 2.2rem !important; font-weight: 10 !important; line-height: 1.2 !important;">API Responde Aí</h4>
-                            </span>
+                                <span class="lead">
+                                    <h2>Token</h2>
+                                </span>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-12">
                             <p class="lead">
-                                <span>Cole o link da página que gostaria de ver sem bloqueios:</span>
+                                <span>Token de acesso</span>
                             </p>
                             <form>
-                                <input id="input_url" style="width:" placeholder="https://app.respondeai.com.br/" type="text" class="form-control" aria-describedby="inputGroup-sizing-default">
-                                <small id="error_label" class="form-text" style="margin-bottom: 20px !important; display:none !important; color: #ff00009c !important;">URL não suportada ou inválida</small>
+                                <input id="input_token" contenteditable="false" style="width:" placeholder="Token de acesso" type="text" class="form-control" aria-describedby="inputGroup-sizing-default">
                                 <div style="margin-top: 10px !important;">
-                                    <button disabled id="btn_unlock" type="button" class="btn btn-success btn-block">Desbloquear</button>
+                                    <button id="btn_set_token" type="button" class="btn btn-success btn-block">Testar e definir token</button>
                                 </div>
                             </form>
                         </div>
@@ -172,10 +163,11 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="container-fluid d-flex justify-content-center">
-                                            <dotlottie-player src="https://lottie.host/1689a5d9-85db-4391-9984-30c6a4a84151/seCfhPsTGW.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+                                            <img class="img-fluid" src="/img/respai.png" style="height: 350px;">
                                         </div>
                                         <center>
-                                            <p class="lead">Nenhuma busca feita ainda</p>
+                                            <p class="lead">Pegue seu token de acesso do Responde Aí, cole no campo acima, e clique no botão <strong><i>"Testar e definir token"</i></strong> para começar a estudar de graça!</p>
+                                            <p class="lead" style="margin-top: 40px !important;">Tá perdido? Segue <a href="/tutorials">esse tutorial</a> que fica facinho!</p>
                                         </center>
                                     </div>
                                 </div>
@@ -215,9 +207,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/core.min.js" integrity="sha512-Vj8DsxZwse5LgmhPlIXhSr/+mwl8OajbZVCr4mX/TcDjwU1ijG6A15cnyRXqZd2mUOQqRk4YbQdc7XhvedWqMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- MEUS JS -->
         <script src="/js/navJS.js"></script>
-        <script src="/js/inputValidator.js"></script>
+        <script src="/js/tokenPage.js"></script>
         <script src="/js/axios.js"></script>
-        <script src="/js/vimeoPlayer.js"></script>
-        <script src="/js/glide.js"></script>
     </body>
 </html>

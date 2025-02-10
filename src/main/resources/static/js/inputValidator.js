@@ -2,6 +2,7 @@ let btnUnlock = document.getElementById("btn_unlock");
 let inputUrl = document.getElementById("input_url");
 let errorLabel = document.getElementById("error_label");
 let cardContent = document.getElementById("card_content");
+const LOCAL_STORAGE_KEY = "token_respai";
 
 
 btnUnlock.addEventListener("click", ()=>{
@@ -16,6 +17,7 @@ btnUnlock.addEventListener("click", ()=>{
     inputUrl.disabled = true;
     btnUnlock.disabled = true;
     let inputContent = inputUrl.value;
+    let token = localStorage.getItem(LOCAL_STORAGE_KEY);
 
     setWaitResponseBlock();
 
@@ -28,7 +30,7 @@ btnUnlock.addEventListener("click", ()=>{
         }),
         headers: {
             "Content-Type" : "application/json",
-            "Authorization" : "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjozOTMzOTgsImdsb2JhbF91bml2ZXJzaXR5X2lkIjoiZGNiNGU1YzEtY2VjZi00MzFhLTlmNzgtYTgzM2I3ZGFlNGIyIiwiaXNfbG9nZ2VkIjp0cnVlLCJoYXNfYWNjZXNzIjpmYWxzZSwibG9naW5fdG9rZW4iOiJZckdraVphRFBXQ1RWc0pCTHU4VyIsIm1vYmlsZV90b2tlbiI6bnVsbCwiZ2xvYmFsX2NhbXB1c19pZCI6ImZmNGIwNzg1LWNmZjctNDJiZi1iMTkxLTNkNzhhNmU1N2Y2MCIsInVuaXZlcnNpdHlfaGFzX2NhbXBpIjp0cnVlLCJzZXNzaW9uX2lkIjoxMTM0OTkzMiwicGxhdGZvcm0iOiJXZWIifSwiZXhwIjoxNzM4NzQ1MTUzfQ.rt3GKiwnh99ZX4haiLi1MRXxqNOic7JCIkxZzlGsH-Q",
+            "Authorization" : token,
         }
     }).then((resp) => {
         if (resp.data.resourceType == "video") {
@@ -312,7 +314,7 @@ function setInvalidOrExpiredTokenBlock() {
                  </div>
                  <center>
                      <p class="lead">Token inválido ou expirado</p>
-                     <small class="form-text" style="margin-bottom: 20px !important;">Atualize seu token de acesso <a href="">aqui</a> antes de tentar novamente</small>
+                     <small class="form-text" style="margin-bottom: 20px !important;">Atualize seu token de acesso <a href="/token">aqui</a> antes de tentar novamente</small>
                  </center>
              </div>
          </div>
