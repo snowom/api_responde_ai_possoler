@@ -28,10 +28,10 @@ btnSetToken.addEventListener("click", ()=> {
         setSuccessResponseBlock();
     }).catch((erro) => {
         if (erro.toString().includes("status code 401")) {
-            alert("FALHA");
-            //setInvalidOrExpiredTokenBlock();
+            setErrorResponseBlock("");
             return;
         }
+        setErrorResponseBlock(erro.toString());
     });
 })
 
@@ -44,6 +44,23 @@ function setSuccessResponseBlock() {
                  </div>
                  <center>
                      <p class="lead">Token validado e definido com sucesso!</p>
+                     <small class="form-text" style="margin-bottom: 20px !important;">Volte para a <a href="/">página principal</a> e comece a estudar!</small>
+                 </center>
+             </div>
+         </div>
+     `;
+}
+
+function setErrorResponseBlock(errorMessage) {
+    cardContent.innerHTML = `
+        <div class="row">
+             <div class="col-12">
+                 <div class="container-fluid d-flex justify-content-center">
+                     <dotlottie-player src="https://lottie.host/e96e04a2-f818-436f-868e-8b56c1ef8a85/ambi2MSaaw.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" autoplay></dotlottie-player>
+                 </div>
+                 <center>
+                     <p class="lead">Token inválido</p>
+                     <small class="form-text" style="margin-bottom: 20px !important;">${errorMessage}</small>
                  </center>
              </div>
          </div>
