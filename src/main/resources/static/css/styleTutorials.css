@@ -1,0 +1,29 @@
+.invertImage
+{
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+@media screen and (max-width: 575px)
+{
+    #right-lamp
+    {
+        display: none;
+    }
+
+    #left-lamp
+    {
+        display: none;
+    }
+}
+
+.styleTitulo
+{
+    font-size: 4rem !important;
+    font-weight: 300 !important;
+    line-height: 1.2 !important;
+    margin-top: 25px;
+    margin-bottom: 0px !important;
+    z-index: 5;
+    display: inline !important;
+}

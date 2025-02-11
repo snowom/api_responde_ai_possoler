@@ -24,4 +24,11 @@ public class HomeController {
         mv.setViewName("token");
         return mv;
     }
+
+    @GetMapping("/tutorials")
+    public ModelAndView tutorials() {
+        mv = new ModelAndView();
+        mv.setViewName("tutorials");
+        return mv;
+    }
 }
