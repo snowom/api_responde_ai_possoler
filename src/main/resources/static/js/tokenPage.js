@@ -11,6 +11,9 @@ window.addEventListener('load', ()=>{
 })
 
 btnSetToken.addEventListener("click", ()=> {
+    btnSetToken.disabled = true;
+    inputToken.disabled = true;
+
     const inputTokenValue = inputToken.value;
     axios({
         method: "POST",
@@ -32,6 +35,9 @@ btnSetToken.addEventListener("click", ()=> {
             return;
         }
         setErrorResponseBlock(erro.toString());
+    }).finally(()=>{
+        btnSetToken.disabled = false;
+        inputToken.disabled = false;
     });
 })
 
