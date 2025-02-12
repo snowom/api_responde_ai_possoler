@@ -361,7 +361,7 @@ function mountVideoDescriptionData(videoObject, coveredTopics, index) {
 
     return `
         <div style="min-height: 300px !important; width: 100% !important; padding: 30px !important;">
-           <p id="dicaTutorial" style="text-align: center !important; margin: 25px 0px !important;">
+           <p style="text-align: center !important; margin: 25px 0px !important;">
                <em style="color: #000 !important">
                    <strong>Dica: </strong>
                    <span>Clique e arraste horizontalmente para mudar de video aula ou use os direcionais do teclado</span>
