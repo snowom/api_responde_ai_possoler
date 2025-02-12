@@ -1,11 +1,22 @@
 let btnMenu = document.getElementById("btnMenu");
 let sidebar = document.querySelector('.sidebar');
+let wallSidebarOpen = document.getElementById('wallSidebarOpen');
 
 btnMenu.onclick = () =>{
-    (sidebar.classList.toggle("active"))
-        ? wallSidebarOpen.classList.add("wall_sidebar_open")
-        : wallSidebarOpen.classList.remove("wall_sidebar_open");
+    if (sidebar.classList.toggle("active")) {
+        wallSidebarOpen.classList.add("wall_sidebar_open");
+        wallSidebarOpen.style.height = `${document.body.clientHeight}px`;
+        return;
+    }
+    wallSidebarOpen.classList.remove("wall_sidebar_open");
+    wallSidebarOpen.style.height = "0px";
 }
+
+wallSidebarOpen.addEventListener("click", ()=>{
+    if (wallSidebarOpen.classList.contains("wall_sidebar_open")) {
+        wallSidebarOpen.style.height = "0px";
+    }
+});
 
 
 let elements = [
