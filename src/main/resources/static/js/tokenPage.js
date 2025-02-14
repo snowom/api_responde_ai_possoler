@@ -11,6 +11,9 @@ window.addEventListener('load', ()=>{
 })
 
 btnSetToken.addEventListener("click", ()=> {
+    btnSetToken.disabled = true;
+    inputToken.disabled = true;
+
     const inputTokenValue = inputToken.value;
     axios({
         method: "POST",
@@ -32,6 +35,9 @@ btnSetToken.addEventListener("click", ()=> {
             return;
         }
         setErrorResponseBlock(erro.toString());
+    }).finally(()=>{
+        btnSetToken.disabled = false;
+        inputToken.disabled = false;
     });
 })
 
@@ -59,7 +65,7 @@ function setErrorResponseBlock(errorMessage) {
                      <dotlottie-player src="https://lottie.host/e96e04a2-f818-436f-868e-8b56c1ef8a85/ambi2MSaaw.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" autoplay></dotlottie-player>
                  </div>
                  <center>
-                     <p class="lead">Token inválido</p>
+                     <p class="lead">Token inválido ou expirado</p>
                      <small class="form-text" style="margin-bottom: 20px !important;">${errorMessage}</small>
                  </center>
              </div>

@@ -1,16 +1,27 @@
 let btnMenu = document.getElementById("btnMenu");
 let sidebar = document.querySelector('.sidebar');
+let wallSidebarOpen = document.getElementById('wallSidebarOpen');
 
 btnMenu.onclick = () =>{
-    (sidebar.classList.toggle("active"))
-        ? wallSidebarOpen.classList.add("wall_sidebar_open")
-        : wallSidebarOpen.classList.remove("wall_sidebar_open");
+    if (sidebar.classList.toggle("active")) {
+        wallSidebarOpen.classList.add("wall_sidebar_open");
+        wallSidebarOpen.style.height = `${document.body.clientHeight}px`;
+        return;
+    }
+    wallSidebarOpen.classList.remove("wall_sidebar_open");
+    wallSidebarOpen.style.height = "0px";
 }
+
+wallSidebarOpen.addEventListener("click", ()=>{
+    if (wallSidebarOpen.classList.contains("wall_sidebar_open")) {
+        wallSidebarOpen.style.height = "0px";
+    }
+});
 
 
 let elements = [
-    "download_icon", "home_icon", "info_icon", "question_icon", "comments_icon",
-    "github_icon", "coffe_icon", "donate_icon", "wallSidebarOpen", "tech_icon", "tutorials_icon"
+    "token_icon", "home_icon", "info_icon", "question_icon", "contact_icon",
+    "github_icon", "donate_icon", "wallSidebarOpen", "tutorials_icon"
 ]
 
 elements.forEach((element)=>{
