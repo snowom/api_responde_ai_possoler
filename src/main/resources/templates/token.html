@@ -17,6 +17,7 @@
         <link rel="stylesheet" type="text/css" href="/css/styleTutorials.css">
         <link rel="stylesheet" type="text/css" href="/css/glide.core.min.css">
         <link rel="stylesheet" type="text/css" href="/css/glide.theme.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/prismTomorrow.css">
     </head>
     <body style="background-color: #f7f7f7 !important;">
         <!-- MENU LATERAL -->
@@ -131,6 +132,30 @@
                     </div>
                 </div>
                 <div class="container-fluid">
+                    <div id="accordion" style="margin-top: 60px !important;">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between" id="headingOne">
+                                <h5 class="mb-0" style="display: inline !important">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Código para obter token</button>
+                                </h5>
+                                <button id="btn_copy" type="button" class="btn btn-outline-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #6c757d;transform: ;msFilter:;">
+                                        <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path>
+                                        <path d="M6 12h6v2H6zm0 4h6v2H6z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="code-toolbar toolbar">
+                                <pre class="language-javascript" tabindex="0">
+                                    <code id="code_block" class="language-javascript line-numbers d-flex flex-row" value="aaaa">
+                                        alert("Hello World!");
+                                    </code>
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row" style="margin-top: 60px !important;">
                         <div class="col-12">
                             <div id="card_content" class="card shadow p-3 mb-5 rounded enableOverflow">
@@ -169,6 +194,8 @@
             </div>
         </div>
 
+        <!-- PRISM JS -->
+        <script src="/js/prism.js"></script>
         <!-- JS BOOTSTRAP -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
