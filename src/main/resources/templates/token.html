@@ -135,9 +135,14 @@
                     <div id="accordion" style="margin-top: 60px !important;">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between" id="headingOne">
-                                <h5 class="mb-0" style="display: inline !important">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Código para obter token</button>
-                                </h5>
+                                <div class="row">
+                                    <div class="col-12" style="display: inline !important">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Código para obter seu token no Responde Aí</button>
+                                        </h5>
+                                        <small class="form-text" style="margin-bottom: 20px !important; margin-left: 13px !important; font-size: 85% !important;">Tá perdido? Segue <a href="/tutorials">esse tutorial</a> que fica facinho!</small>
+                                    </div>
+                                </div>
                                 <button id="btn_copy" type="button" class="btn btn-outline-secondary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #6c757d;transform: ;msFilter:;">
                                         <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path>
@@ -146,11 +151,51 @@
                                 </button>
                             </div>
                         </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="code-toolbar toolbar">
                                 <pre class="language-javascript" tabindex="0">
-                                    <code id="code_block" class="language-javascript line-numbers d-flex flex-row" value="aaaa">
-                                        alert("Hello World!");
+                                    <code id="code_block" class="language-javascript line-numbers" value='try{let sweetAlertJS = document.createElement("script");let name = "user_jwt" + "=";let decodedCookie = decodeURIComponent(document.cookie);let ca = decodedCookie.split(";");sweetAlertJS.setAttribute("src", "https://cdn.jsdelivr.net/npm/sweetalert2@10");document.head.appendChild(sweetAlertJS);let r = setInterval(() => {if(typeof(Swal) == "function") {clearInterval(r);for(let i = 0; i <ca.length; i++) {let c = ca[i];while (c.charAt(0) == " ") {c = c.substring(1);}if (c.indexOf(name) == 0) {const inputValue = c.substring(name.length, c.length);Swal.fire({allowEscapeKey: false,allowOutsideClick: false,title: "Token copiado com sucesso",input: "text",icon: "success",inputAttributes: {autocapitalize: "off"},inputLabel: "Copie seu token de acesso",inputValue,});Swal.disableInput();break;}}}},300);}catch(error) {console.error(error.toString());setTimeout(()=>{location.reload();},3000);}'>
+                                        try&#123
+                                            let sweetAlertJS = document.createElement('script');
+                                            sweetAlertJS.setAttribute('src', 'https://cdn.jsdelivr.net/npm/sweetalert2@10');
+                                            document.head.appendChild(sweetAlertJS);
+                                            let name = "user_jwt" + "=";
+                                            let decodedCookie = decodeURIComponent(document.cookie);
+                                            let ca = decodedCookie.split(';');
+                                            let r = setInterval(() =&#62 &#123
+                                                if(typeof(Swal) == "function") &#123
+                                                    clearInterval(r);
+                                                    for(let i = 0; i &#60ca.length; i++) &#123
+                                                        let c = ca[i];
+                                                        while (c.charAt(0) == " ") &#123
+                                                            c = c.substring(1);
+                                                        &#125
+                                                        if (c.indexOf(name) == 0) &#123
+                                                            const inputValue = c.substring(name.length, c.length);
+                                                            Swal.fire(&#123
+                                                                allowEscapeKey: false,
+                                                                allowOutsideClick: false,
+                                                                title: "Token copiado com sucesso",
+                                                                input: "text",
+                                                                icon: "success",
+                                                                inputAttributes: &#123
+                                                                autocapitalize: "off"
+                                                                &#125,
+                                                                inputLabel: "Copie seu token de acesso",
+                                                                inputValue,
+                                                            &#125);
+                                                            Swal.disableInput();
+                                                            break;
+                                                        &#125
+                                                    &#125
+                                                &#125
+                                            &#125,300);
+                                        &#125catch(error) &#123
+                                            console.error(error.toString());
+                                            setTimeout(()=&#62&#123
+                                                location.reload();
+                                            &#125,3000);
+                                        &#125
                                     </code>
                                 </pre>
                             </div>
